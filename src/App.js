@@ -3,13 +3,14 @@ import './App.css';
 import React from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import LandingPage from "./Landing Page/LandingPage";
-import PatientLogin from "./PatientLogin/PatientLogin";
+import PatientLogin from "./Login/PatientLogin/PatientLogin";
 import PatientDashboard from "./PatientDashboard/PatientDashboard";
 import PatientDashpage from "./PatientDashboard/PatientDashpage";
-import StaffLogin from "./StaffLogin/StaffLogin";
+import StaffLogin from "./Login/StaffLogin/StaffLogin";
 import DoctorDashboard from "./DoctorDashboard/DoctorDashboard";
 import AdminDashboard from "./AdminDashboard/AdminDashboard";
 import NurseDashboard from "./NurseDashboard/NurseDashboard";
+import PatientRegister from "./Login/PatientRegister/PatientRegister";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path='/' element={<LandingPage />}></Route>
           <Route path='/patientlogin' element={<PatientLogin />}></Route>
+          <Route path='/patientregister' element={<PatientRegister />}></Route>
           <Route path='/stafflogin' element={<StaffLogin />}></Route>
           <Route path='/patientdashboard' element={<PatientDashboard />}>
             <Route path="" element={<PatientDashpage />} ></Route>

@@ -156,11 +156,21 @@ function AppAppBar({ mode, toggleColorMode }) {
                 variant="contained"
                 size="small"
                 component="a"
-                href="/patientlogin"
+                href="/patientregister"
                 target="_blank"
               >
-                  Sign in
+                  Register
               </Button>
+                <Button
+                    color="primary"
+                    variant="contained"
+                    size="small"
+                    component="a"
+                    href="/patientlogin"
+                    target="_blank"
+                >
+                    Sign in
+                </Button>
             </Box>
             <Box sx={{ display: { sm: '', md: 'none' } }}>
               <Button
