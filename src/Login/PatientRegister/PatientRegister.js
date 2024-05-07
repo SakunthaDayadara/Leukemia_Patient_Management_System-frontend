@@ -3,8 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -14,6 +12,13 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {FormControl, InputLabel, Select} from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
+import {useState} from "react";
+import {useNavigate} from "react-router-dom";
+
+
+
+
+
 
 
 
@@ -23,13 +28,61 @@ import MenuItem from "@mui/material/MenuItem";
 const defaultTheme = createTheme();
 
 export default function PatientRegister() {
-    const handleSubmit = (event) => {
+
+    const [gender, setGender] = useState("");// State to hold the selected gender
+    const navigate = useNavigate();
+    const handleGenderChange = (event) => {
+        setGender(event.target.value);// Update the gender state when the value changes
+
+    };
+
+    const [selectedDate, setSelectedDate] = useState("2000-01-01"); // Initial selected date
+
+    const handleDateChange = (event) => {
+        setSelectedDate(event.target.value); // Update selected date when the value changes
+    };
+
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        const form = event.currentTarget;
+        const formData = new FormData(form);
+
+
+
+        const patientData = {
+            patient: {
+                dob: selectedDate,
+                nic: formData.get('nic'),
+                address: formData.get('address'),
+                gender: gender,
+                username: formData.get('username'),
+                password: formData.get('password'),
+                first_name: formData.get('firstName'),
+                last_name: formData.get('lastName'),
+                telephone: formData.get('telephone')
+            }
+        };
+
+        try {
+            console.log(patientData)
+            const response = await fetch('http://127.0.0.1:3000/patients', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(patientData)
+            });
+
+            if (response.ok) {
+                navigate("/patientlogin"); // Redirect upon successful submission
+            } else {
+                console.error('Failed to submit form:', response.statusText);
+
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
     };
 
     return (
@@ -75,11 +128,13 @@ export default function PatientRegister() {
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <FormControl fullWidth>
-                                    <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                                    <InputLabel >Gender</InputLabel>
                                     <Select
                                         labelId="demo-simple-select-label"
                                         id="gender"
                                         label="Gender"
+                                        value={gender}
+                                        onChange={handleGenderChange}
                                     >
                                         <MenuItem value={"male"}>Male</MenuItem>
                                         <MenuItem value={"female"}>Female</MenuItem>
@@ -87,7 +142,18 @@ export default function PatientRegister() {
                                 </FormControl>
                             </Grid>
                             <Grid item xs={12} sm={6}>
-
+                                <TextField
+                                    required
+                                    fullWidth
+                                    id="dob"
+                                    label="Date of Birth"
+                                    type="date"
+                                    value={selectedDate} // Set the value to the selected date
+                                    onChange={handleDateChange}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
@@ -97,6 +163,26 @@ export default function PatientRegister() {
                                     label="NIC"
                                     id="nic"
                                     autoComplete="nic"
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    required
+                                    fullWidth
+                                    name="address"
+                                    label="Address"
+                                    id="address"
+                                    autoComplete="address"
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    required
+                                    fullWidth
+                                    name="telephone"
+                                    label="Telephone"
+                                    id="telephone"
+                                    autoComplete="telephone"
                                 />
                             </Grid>
                             <Grid item xs={12}>
