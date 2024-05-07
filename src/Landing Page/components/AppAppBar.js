@@ -146,7 +146,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                 variant="text"
                 size="small"
                 component="a"
-                href="/login"
+                href="/stafflogin"
                 target="_blank"
               >
                 Staff
@@ -224,7 +224,7 @@ function AppAppBar({ mode, toggleColorMode }) {
                       color="primary"
                       variant="outlined"
                       component="a"
-                      href="/login"
+                      href="/stafflogin"
                       target="_blank"
                       sx={{ width: '100%' }}
                     >

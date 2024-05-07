@@ -13,9 +13,11 @@ import Badge from '@mui/material/Badge';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { patientmainListItems} from './PatientlistItems';
+
 
 import { Outlet} from 'react-router-dom';
+import {adminmainListItems} from "./AdminListItem";
+
 
 
 
@@ -68,7 +70,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-export default function PatientDashboard() {
+export default function AdminDashboard() {
     const [open, setOpen] = React.useState(true);
     const [userData, setUserData] = React.useState(null);
     const toggleDrawer = () => {
@@ -85,7 +87,7 @@ export default function PatientDashboard() {
                 }
 
                 // Fetch user data using token
-                const autoLoginResponse = await fetch('http://127.0.0.1:3000/patients/auto_login', {
+                const autoLoginResponse = await fetch('http://127.0.0.1:3000/staffautologin', {
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -97,19 +99,19 @@ export default function PatientDashboard() {
                 const autoLoginData = await autoLoginResponse.json();
 
                 // Fetch additional user info using user ID
-                const findPatientResponse = await fetch(`http://127.0.0.1:3000/patients/find_by_patient_id?patient_id=${autoLoginData.user_id}`, {
+                const findAdminResponse = await fetch(`http://127.0.0.1:3000/admins/find_by_admin_id?admin_id=${autoLoginData.user_id}`, {
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                if (!findPatientResponse.ok) {
+                if (!findAdminResponse.ok) {
                     throw new Error('Failed to fetch user details');
                 }
-                const patientData = await findPatientResponse.json();
+                const adminData = await findAdminResponse.json();
 
                 // Update state with user data
-                setUserData(patientData);
+                setUserData(adminData);
             } catch (error) {
                 console.error('Error fetching user data:', error);
             }
@@ -149,7 +151,7 @@ export default function PatientDashboard() {
                             noWrap
                             sx={{ flexGrow: 1 }}
                         >
-                            {userData && userData.first_name && `Welcome, ${userData.first_name}`}
+                            {userData && userData.name && `Welcome, ${userData.name}`}
                         </Typography>
                         <IconButton color="inherit">
                             <Badge badgeContent={4} color="secondary">
@@ -173,7 +175,7 @@ export default function PatientDashboard() {
                     </Toolbar>
                     <Divider />
                     <List component="nav">
-                        {patientmainListItems}
+                        {adminmainListItems}
                     </List>
                 </Drawer>
 
