@@ -14,11 +14,11 @@ export const adminmainListItems = (
             </ListItemIcon>
             <ListItemText primary="Dashboard" />
         </ListItemButton>
-        <ListItemButton component={Link} to="/admindashboard/part1">
+        <ListItemButton component={Link} to="/admindashboard/accountmanagement">
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
-            <ListItemText primary="Part 1" />
+            <ListItemText primary="Account Management" />
         </ListItemButton>
         <ListItemButton component={Link} to="/admindashboard/part2">
             <ListItemIcon>

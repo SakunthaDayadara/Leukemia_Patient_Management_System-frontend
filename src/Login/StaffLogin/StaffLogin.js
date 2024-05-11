@@ -129,6 +129,13 @@ export default function StaffLogin() {
                         >
                             Sign In
                         </Button>
+                        <Grid container justifyContent="flex-end">
+                            <Grid item>
+                                <Link href="#" variant="body2">
+                                    {"Verify your Account"}
+                                </Link>
+                            </Grid>
+                        </Grid>
 
                     </Box>
                 </Box>

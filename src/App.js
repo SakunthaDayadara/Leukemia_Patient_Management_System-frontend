@@ -11,6 +11,10 @@ import DoctorDashboard from "./DoctorDashboard/DoctorDashboard";
 import AdminDashboard from "./AdminDashboard/AdminDashboard";
 import NurseDashboard from "./NurseDashboard/NurseDashboard";
 import PatientRegister from "./Login/PatientRegister/PatientRegister";
+import AdminDashpage from "./AdminDashboard/AdminDashpage";
+import AdminAccountManagement from "./AdminFunctions/AccountManagement/AdminAccountManagement";
+import AdminCreateAccount from "./AdminFunctions/AccountManagement/AdminCreateAccount";
+import AdminUpdateAccount from "./AdminFunctions/AccountManagement/AdminUpdateAccount";
 
 function App() {
   return (
@@ -36,8 +40,11 @@ function App() {
             <Route path="part4"></Route>
           </Route>
           <Route path='/admindashboard' element={<AdminDashboard />}>
-            <Route path="" element={<PatientDashpage />} ></Route>
-            <Route path="part1"></Route>
+            <Route path="" element={<AdminDashpage />} ></Route>
+            <Route path="accountmanagement" element={<AdminAccountManagement />}>
+              <Route path="" element={<AdminCreateAccount />}></Route>
+              <Route path="updateaccount" element={<AdminUpdateAccount />}></Route>
+            </Route>
             <Route path="part2"></Route>
             <Route path="part3"></Route>
             <Route path="part4"></Route>
