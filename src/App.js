@@ -15,6 +15,7 @@ import AdminDashpage from "./AdminDashboard/AdminDashpage";
 import AdminAccountManagement from "./AdminFunctions/AccountManagement/AdminAccountManagement";
 import AdminCreateAccount from "./AdminFunctions/AccountManagement/AdminCreateAccount";
 import AdminUpdateAccount from "./AdminFunctions/AccountManagement/AdminUpdateAccount";
+import AdminUpdateAccountPassword from "./AdminFunctions/AccountManagement/AdminUpdateAccountPassword";
 
 function App() {
   return (
@@ -43,7 +44,9 @@ function App() {
             <Route path="" element={<AdminDashpage />} ></Route>
             <Route path="accountmanagement" element={<AdminAccountManagement />}>
               <Route path="" element={<AdminCreateAccount />}></Route>
-              <Route path="updateaccount" element={<AdminUpdateAccount />}></Route>
+              <Route path="updateaccount" element={<AdminUpdateAccount />}>
+                <Route path=":type/:user_id" element={<AdminUpdateAccountPassword />}></Route>
+              </Route>
             </Route>
             <Route path="part2"></Route>
             <Route path="part3"></Route>
