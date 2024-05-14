@@ -11,9 +11,11 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {Alert, AlertTitle} from "@mui/material";
 import {useNavigate} from "react-router-dom";
+
+import useAuth from "../../Hooks/useAuth";
 
 
 
@@ -22,6 +24,7 @@ import {useNavigate} from "react-router-dom";
 const defaultTheme = createTheme();
 
 export default function PatientLogin() {
+    const { setAuth } = useAuth();
     const navigate = useNavigate();
     const [error, setError] = useState(null);
 
@@ -53,9 +56,11 @@ export default function PatientLogin() {
 
             const responseData = await response.json();
             localStorage.setItem('token', responseData.token);
+            setAuth({ isAuthenticated: true, role: responseData.role, token: responseData.token });
             // Navigate to the dashboard component or perform any other action after successful login
             // For example:
             navigate("/patientdashboard");
+
         } catch (error) {
             setError(error.message);
         }

@@ -14,11 +14,11 @@ export const nursemainListItems = (
             </ListItemIcon>
             <ListItemText primary="Dashboard" />
         </ListItemButton>
-        <ListItemButton component={Link} to="/nursedashboard/part1">
+        <ListItemButton component={Link} to="/nursedashboard/patientmanagement">
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
-            <ListItemText primary="Part 1" />
+            <ListItemText primary="Patient Management" />
         </ListItemButton>
         <ListItemButton component={Link} to="/nursedashboard/part2">
             <ListItemIcon>

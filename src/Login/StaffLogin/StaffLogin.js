@@ -14,6 +14,7 @@ import {useState} from "react";
 import {Alert, AlertTitle} from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import Container from "@mui/material/Container";
+import useAuth from "../../Hooks/useAuth";
 
 
 
@@ -22,6 +23,7 @@ import Container from "@mui/material/Container";
 const defaultTheme = createTheme();
 
 export default function StaffLogin() {
+    const { setAuth } = useAuth();
     const navigate = useNavigate();
     const [error, setError] = useState(null);
 
@@ -54,7 +56,7 @@ export default function StaffLogin() {
             const responseData = await response.json();
             localStorage.setItem('token', responseData.token);
             const { role } = responseData;
-
+            setAuth({ isAuthenticated: true, role: responseData.role, token: responseData.token });
             // Determine which dashboard route to navigate based on role
             if (role === 'admin') {
                 navigate("/admindashboard");
@@ -65,6 +67,7 @@ export default function StaffLogin() {
             }else {
                 // Handle other roles or scenarios
             }
+
         } catch (error) {
             setError(error.message);
         }
