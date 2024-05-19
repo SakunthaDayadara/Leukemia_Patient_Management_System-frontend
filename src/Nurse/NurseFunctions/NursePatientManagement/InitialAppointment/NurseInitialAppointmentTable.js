@@ -5,9 +5,10 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import MaterialTable from 'material-table';
-import {useNavigate} from "react-router-dom";
+import {Link, Outlet, useNavigate} from "react-router-dom";
+import Button from "@mui/material/Button";
 
-function NursePatientManagement() {
+function NurseInitialAppointmentTable() {
     const navigate = useNavigate();
     const [patients, setPatients] = useState([]);
 
@@ -17,7 +18,7 @@ function NursePatientManagement() {
 
     const fetchPatients = async () => {
         try {
-            const response = await fetch("http://127.0.0.1:3000/patients/temporary_patients");
+            const response = await fetch("http://127.0.0.1:3000/patients/initial_appointment");
             const data = await response.json();
             setPatients(data);
         } catch (error) {
@@ -26,6 +27,9 @@ function NursePatientManagement() {
     };
 
     const handleDelete = async (rowData) => {
+        const isConfirmed = window.confirm('Are you sure you want to delete this patient?');
+        if (!isConfirmed) return;
+
         try {
             const token = localStorage.getItem('token');
             const response = await fetch(`http://127.0.0.1:3000/patients/delete_by_patient_id?patient_id=${rowData.patient_id}`, {
@@ -53,21 +57,6 @@ function NursePatientManagement() {
 
     return (
         <React.Fragment>
-            <Box
-                component="main"
-                sx={{
-                    backgroundColor: (theme) =>
-                        theme.palette.mode === 'light'
-                            ? theme.palette.grey[100]
-                            : theme.palette.grey[900],
-                    flexGrow: 1,
-                    height: '100vh',
-                    overflow: 'auto',
-                }}
-            >
-                <Toolbar />
-                <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-                    <Grid item xs={12} md={8} lg={9}>
                         <Paper
                             sx={{
                                 p: 2,
@@ -91,7 +80,7 @@ function NursePatientManagement() {
                                 title="Patients"
                                 style={{ width: '100%' }}
                                 components={{
-                                   // Pagination: () => null, // Remove the pagination component
+                                    // Pagination: () => null, // Remove the pagination component
                                 }}
                                 options={{
                                     pageSize: 5,
@@ -103,7 +92,7 @@ function NursePatientManagement() {
                                         icon: 'edit',
                                         tooltip: 'Edit Patient',
                                         onClick: (event, rowData) => {
-                                            navigate(`/nursedashboard/confirmpatient/${rowData.patient_id}`);
+                                            navigate(`/nursedashboard/patientmanagement/confirmpatient/${rowData.patient_id}`);
                                             console.log('Edit patient:', rowData);
                                         }
                                     },
@@ -118,11 +107,10 @@ function NursePatientManagement() {
                                 ]}
                             />
                         </Paper>
-                    </Grid>
-                </Container>
-            </Box>
+
+
         </React.Fragment>
     );
 }
 
-export default NursePatientManagement;
+export default NurseInitialAppointmentTable;

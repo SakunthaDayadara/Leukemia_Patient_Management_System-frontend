@@ -4,21 +4,28 @@ import React from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import LandingPage from "./Landing Page/LandingPage";
 import PatientLogin from "./Login/PatientLogin/PatientLogin";
-import PatientDashboard from "./PatientDashboard/PatientDashboard";
-import PatientDashpage from "./PatientDashboard/PatientDashpage";
+import PatientDashboard from "./Patient/PatientDashboard/PatientDashboard";
+import PatientDashpage from "./Patient/PatientDashboard/PatientDashpage";
 import StaffLogin from "./Login/StaffLogin/StaffLogin";
-import DoctorDashboard from "./DoctorDashboard/DoctorDashboard";
-import AdminDashboard from "./AdminDashboard/AdminDashboard";
-import NurseDashboard from "./NurseDashboard/NurseDashboard";
+import DoctorDashboard from "./Doctor/DoctorDashboard/DoctorDashboard";
+import AdminDashboard from "./Admin/AdminDashboard/AdminDashboard";
+import NurseDashboard from "./Nurse/NurseDashboard/NurseDashboard";
 import PatientRegister from "./Login/PatientRegister/PatientRegister";
-import AdminDashpage from "./AdminDashboard/AdminDashpage";
-import AdminAccountManagement from "./AdminFunctions/AccountManagement/AdminAccountManagement";
-import AdminCreateAccount from "./AdminFunctions/AccountManagement/AdminCreateAccount";
-import AdminUpdateAccount from "./AdminFunctions/AccountManagement/AdminUpdateAccount";
-import AdminUpdateAccountPassword from "./AdminFunctions/AccountManagement/AdminUpdateAccountPassword";
-import NursePatientManagement from "./NurseFunctions/NursePatientManagement/NursePatientManagement";
-import NurseConfirmPatient from "./NurseFunctions/NursePatientManagement/NurseConfirmPatient";
+import AdminDashpage from "./Admin/AdminDashboard/AdminDashpage";
+import AdminAccountManagement from "./Admin/AdminFunctions/AccountManagement/AdminAccountManagement";
+import AdminCreateAccount from "./Admin/AdminFunctions/AccountManagement/AdminCreateAccount";
+import AdminUpdateAccount from "./Admin/AdminFunctions/AccountManagement/AdminUpdateAccount";
+import AdminUpdateAccountPassword from "./Admin/AdminFunctions/AccountManagement/AdminUpdateAccountPassword";
+import NursePatientManagement from "./Nurse/NurseFunctions/NursePatientManagement/NursePatientManagement";
+import NurseConfirmInitialAppointment from "./Nurse/NurseFunctions/NursePatientManagement/InitialAppointment/NurseConfirmInitialAppointment";
 import RequireAuth from "./Util/RequireAuth";
+import NurseInitialAppointmentTable from "./Nurse/NurseFunctions/NursePatientManagement/InitialAppointment/NurseInitialAppointmentTable";
+import NurseTestDoneTable from "./Nurse/NurseFunctions/NursePatientManagement/TestDone/NurseTestDoneTable";
+import NurseConfirmTestDone from "./Nurse/NurseFunctions/NursePatientManagement/TestDone/NurseConfirmTestDone";
+import DoctorPatientManagement from "./Doctor/DoctorFunctions/DoctorpatientManagement/DoctorPatientManagement";
+import DoctorToDiagnoseTable
+  from "./Doctor/DoctorFunctions/DoctorpatientManagement/DoctorToDiagnose/DoctorToDiagnoseTable";
+import PatientMakeAppointments from "./Patient/PatientFunctions/PatientMakeAppointments/PatientMakeAppointments";
 
 function App() {
   return (
@@ -30,6 +37,7 @@ function App() {
           <Route path='/patientregister' element={<PatientRegister />}></Route>
           <Route path='/stafflogin' element={<StaffLogin />}></Route>
           <Route element={<RequireAuth allowedRole={"patient"} />}>
+            <Route path='/patientappointment/:patient_id' element={<PatientMakeAppointments />}></Route>
             <Route path='/patientdashboard' element={<PatientDashboard />}>
               <Route path="" element={<PatientDashpage />} ></Route>
               <Route path="part1"></Route>
@@ -41,7 +49,9 @@ function App() {
           <Route element={<RequireAuth allowedRole={"doctor"} />}>
             <Route path='/doctordashboard' element={<DoctorDashboard />}>
               <Route path="" element={<PatientDashpage />} ></Route>
-              <Route path="part1"></Route>
+              <Route path="patientmanagement" element={<DoctorPatientManagement />}>
+                <Route path="" element={<DoctorToDiagnoseTable />}></Route>
+              </Route>
               <Route path="part2"></Route>
               <Route path="part3"></Route>
               <Route path="part4"></Route>
@@ -64,8 +74,13 @@ function App() {
           <Route element={<RequireAuth allowedRole={"nurse"} />}>
             <Route path='/nursedashboard' element={<NurseDashboard />}>
               <Route path="" element={<PatientDashpage />} ></Route>
-              <Route path="patientmanagement" element={<NursePatientManagement />}></Route>
-              <Route path="confirmpatient/:patient_id" element={<NurseConfirmPatient />}></Route>
+              <Route path="patientmanagement" element={<NursePatientManagement />}>
+                <Route path="" element={<NurseInitialAppointmentTable />}></Route>
+                <Route path="confirmpatient/:patient_id" element={<NurseConfirmInitialAppointment />}></Route>
+                <Route path="testdone" element={<NurseTestDoneTable />}></Route>
+                <Route path="testdone/:patient_id" element={<NurseConfirmTestDone />}></Route>
+
+              </Route>
               <Route path="part2"></Route>
               <Route path="part3"></Route>
               <Route path="part4"></Route>
