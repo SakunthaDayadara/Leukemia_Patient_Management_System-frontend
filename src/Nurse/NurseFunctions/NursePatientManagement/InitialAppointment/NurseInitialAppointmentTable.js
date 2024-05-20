@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import MaterialTable from 'material-table';
 import {Link, Outlet, useNavigate} from "react-router-dom";
-import Button from "@mui/material/Button";
+
 
 function NurseInitialAppointmentTable() {
     const navigate = useNavigate();

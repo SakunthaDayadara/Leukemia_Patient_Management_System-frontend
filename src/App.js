@@ -26,6 +26,17 @@ import DoctorPatientManagement from "./Doctor/DoctorFunctions/DoctorpatientManag
 import DoctorToDiagnoseTable
   from "./Doctor/DoctorFunctions/DoctorpatientManagement/DoctorToDiagnose/DoctorToDiagnoseTable";
 import PatientMakeAppointments from "./Patient/PatientFunctions/PatientMakeAppointments/PatientMakeAppointments";
+import NurseAppointmentManagement from "./Nurse/NurseFunctions/NurseAppointmentManagement/NurseAppointmentManagement";
+import NurseConfirmAppointmentTable
+  from "./Nurse/NurseFunctions/NurseAppointmentManagement/NurseConfirmAppointment/NurseConfirmAppointmentTable";
+import NurseConfirmAppointment
+  from "./Nurse/NurseFunctions/NurseAppointmentManagement/NurseConfirmAppointment/NurseConfirmAppointment";
+import NurseOngoingAppointmentTable
+  from "./Nurse/NurseFunctions/NurseAppointmentManagement/NurseOngoingAppointment/NurseOngoingAppointmentTable";
+import NurseRescheduleAppointmentTable
+  from "./Nurse/NurseFunctions/NurseAppointmentManagement/NurseRescheduleAppointment/NurseRescheduleAppointmentTable";
+import NurseFinishedAppointment
+  from "./Nurse/NurseFunctions/NurseAppointmentManagement/NurseFinishedAppointment/NurseFinishedAppointment";
 
 function App() {
   return (
@@ -74,14 +85,21 @@ function App() {
           <Route element={<RequireAuth allowedRole={"nurse"} />}>
             <Route path='/nursedashboard' element={<NurseDashboard />}>
               <Route path="" element={<PatientDashpage />} ></Route>
+              <Route path="appointmentmanagement" element={<NurseAppointmentManagement />}>
+                <Route path="" element={<NurseConfirmAppointmentTable />}></Route>
+                <Route path="confirmappointment/:appointment_id" element={<NurseConfirmAppointment />}></Route>
+                <Route path="rescheduleappointment" element={<NurseRescheduleAppointmentTable />}></Route>
+                <Route path="rescheduleappointment/:appointment_id"></Route>
+                <Route path="ongoingappointment" element={<NurseOngoingAppointmentTable />}></Route>
+                <Route path="finishedappointment" element={<NurseFinishedAppointment />}></Route>
+
+              </Route>
               <Route path="patientmanagement" element={<NursePatientManagement />}>
                 <Route path="" element={<NurseInitialAppointmentTable />}></Route>
                 <Route path="confirmpatient/:patient_id" element={<NurseConfirmInitialAppointment />}></Route>
                 <Route path="testdone" element={<NurseTestDoneTable />}></Route>
                 <Route path="testdone/:patient_id" element={<NurseConfirmTestDone />}></Route>
-
               </Route>
-              <Route path="part2"></Route>
               <Route path="part3"></Route>
               <Route path="part4"></Route>
             </Route>

@@ -14,6 +14,12 @@ export const nursemainListItems = (
             </ListItemIcon>
             <ListItemText primary="Dashboard" />
         </ListItemButton>
+        <ListItemButton component={Link} to="/nursedashboard/appointmentmanagement">
+            <ListItemIcon>
+                <DashboardIcon />
+            </ListItemIcon>
+            <ListItemText primary="Appointments" />
+        </ListItemButton>
         <ListItemButton component={Link} to="/nursedashboard/patientmanagement">
             <ListItemIcon>
                 <DashboardIcon />
