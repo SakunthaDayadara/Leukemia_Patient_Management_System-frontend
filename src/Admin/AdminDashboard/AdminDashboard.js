@@ -89,7 +89,7 @@ export default function AdminDashboard() {
                 }
 
                 // Fetch user data using token
-                const autoLoginResponse = await fetch('http://127.0.0.1:3000/staffautologin', {
+                const autoLoginResponse = await fetch('http://${process.env.REACT_APP_BACKEND_URL}/staffautologin', {
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -101,7 +101,7 @@ export default function AdminDashboard() {
                 const autoLoginData = await autoLoginResponse.json();
 
                 // Fetch additional user info using user ID
-                const findAdminResponse = await fetch(`http://127.0.0.1:3000/admins/find_by_admin_id?admin_id=${autoLoginData.user_id}`, {
+                const findAdminResponse = await fetch(`http://${process.env.REACT_APP_BACKEND_URL}/admins/find_by_admin_id?admin_id=${autoLoginData.user_id}`, {
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${token}`,

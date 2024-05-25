@@ -18,7 +18,7 @@ function DoctorToCategorizeTable() {
 
     const fetchPatients = async () => {
         try {
-            const response = await fetch("http://127.0.0.1:3000/patients/doctor_categorize_table");
+            const response = await fetch("http://${process.env.REACT_APP_BACKEND_URL}/patients/doctor_categorize_table");
             const data = await response.json();
             setPatients(data);
         } catch (error) {

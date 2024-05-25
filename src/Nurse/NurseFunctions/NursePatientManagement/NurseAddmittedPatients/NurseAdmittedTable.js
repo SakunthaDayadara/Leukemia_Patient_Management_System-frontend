@@ -14,7 +14,7 @@ function NurseAdmittedTable() {
 
     const fetchPatients = async () => {
         try {
-            const response = await fetch("http://127.0.0.1:3000/patients/admitted_patients");
+            const response = await fetch("http://${process.env.REACT_APP_BACKEND_URL}/patients/admitted_patients");
             const data = await response.json();
             setPatients(data);
         } catch (error) {
@@ -28,7 +28,7 @@ function NurseAdmittedTable() {
 
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`http://127.0.0.1:3000/patients/delete_by_patient_id?patient_id=${rowData.patient_id}`, {
+            const response = await fetch(`http://${process.env.REACT_APP_BACKEND_URL}/patients/delete_by_patient_id?patient_id=${rowData.patient_id}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`,

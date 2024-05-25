@@ -15,7 +15,7 @@ function NurseConfirmRescheduleAppointment() {
 
     const fetchAppointment = async () => {
         try {
-            const response = await fetch(`http://127.0.0.1:3000/appointments/find_by_appointment_id?appointment_id=${appointment_id}`);
+            const response = await fetch(`http://${process.env.REACT_APP_BACKEND_URL}/appointments/find_by_appointment_id?appointment_id=${appointment_id}`);
             const data = await response.json();
             setAppointment(data);
         } catch (error) {
@@ -30,7 +30,7 @@ function NurseConfirmRescheduleAppointment() {
 
     const handleConfirm = async () => {
         try {
-            const response = await fetch(`http://127.0.0.1:3000/appointments/make_reschedule_done`, {
+            const response = await fetch(`http://${process.env.REACT_APP_BACKEND_URL}/appointments/make_reschedule_done`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'

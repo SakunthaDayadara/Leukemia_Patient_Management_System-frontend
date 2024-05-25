@@ -41,7 +41,7 @@ export default function PatientLogin() {
                 email: data.get('email'),
                 password: data.get('password'),
             });
-            const response = await fetch('http://127.0.0.1:3000/patients/login', {
+            const response = await fetch('http://${process.env.REACT_APP_BACKEND_URL}/patients/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

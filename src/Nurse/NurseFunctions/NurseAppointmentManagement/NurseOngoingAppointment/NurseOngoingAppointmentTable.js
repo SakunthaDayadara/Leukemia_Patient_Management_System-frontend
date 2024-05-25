@@ -13,7 +13,7 @@ function NurseOngoingAppointmentTable() {
 
     const fetchAppointments = async () => {
         try {
-            const response = await fetch("http://127.0.0.1:3000/appointments/ongoing_appointment");
+            const response = await fetch("http://${process.env.REACT_APP_BACKEND_URL}/appointments/ongoing_appointment");
             const data = await response.json();
             setAppointments(data);
         } catch (error) {
@@ -26,7 +26,7 @@ function NurseOngoingAppointmentTable() {
         if (!isConfirmed) return;
 
         try {
-            const response = await fetch(`http://127.0.0.1:3000/appointments/delete_by_appointment_id?appointment_id=${rowData.appointment_id}`, {
+            const response = await fetch(`http://${process.env.REACT_APP_BACKEND_URL}/appointments/delete_by_appointment_id?appointment_id=${rowData.appointment_id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'

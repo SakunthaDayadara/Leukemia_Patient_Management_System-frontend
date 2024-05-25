@@ -16,7 +16,7 @@ function NurseConfirmToAdmit() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`http://127.0.0.1:3000/patients/find_by_patient_id?patient_id=${patient_id}`, {
+        fetch(`http://${process.env.REACT_APP_BACKEND_URL}/patients/find_by_patient_id?patient_id=${patient_id}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             }
@@ -24,7 +24,7 @@ function NurseConfirmToAdmit() {
             .then(response => response.json())
             .then(data => {
                 setPatientData(data);
-                return fetch(`http://127.0.0.1:3000/wards/get_wards_by_gender?patient_gender=${data.gender}`, {
+                return fetch(`http://${process.env.REACT_APP_BACKEND_URL}/wards/get_wards_by_gender?patient_gender=${data.gender}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
@@ -43,7 +43,7 @@ function NurseConfirmToAdmit() {
         const wardNum = event.target.value;
         setSelectedWard(wardNum);
         setSelectedBed(""); // Reset selected bed when ward changes
-        fetch(`http://127.0.0.1:3000/beds/get_available_beds_by_ward?ward_num=${wardNum}`, {
+        fetch(`http://${process.env.REACT_APP_BACKEND_URL}/beds/get_available_beds_by_ward?ward_num=${wardNum}`, {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('token')}`
             }
@@ -72,7 +72,7 @@ function NurseConfirmToAdmit() {
                 patient_id: patientData.patient_id,
                 bht_number: bhtNumber
             };
-            await fetch(`http://127.0.0.1:3000/patients/nurse_admit_patient`, {
+            await fetch(`http://${process.env.REACT_APP_BACKEND_URL}/patients/nurse_admit_patient`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ function NurseConfirmToAdmit() {
                 bed_id: selectedBed,
                 patient_id: patientData.patient_id
             };
-            await fetch(`http://127.0.0.1:3000/beds/admit_patient`, {
+            await fetch(`http://${process.env.REACT_APP_BACKEND_URL}/beds/admit_patient`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ function NurseConfirmToAdmit() {
             const nurseDiagnoseRequest = {
                 patient_id: patientData.patient_id
             };
-            await fetch(`http://127.0.0.1:3000/appointments/make_appointment_done`, {
+            await fetch(`http://${process.env.REACT_APP_BACKEND_URL}/appointments/make_appointment_done`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
