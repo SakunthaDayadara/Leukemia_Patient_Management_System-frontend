@@ -14,13 +14,7 @@ import {FormControl, InputLabel, Select} from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
-
-
-
-
-
-
-
+import useAuth from "../../Hooks/useAuth";
 
 
 
@@ -28,6 +22,7 @@ import {useNavigate} from "react-router-dom";
 const defaultTheme = createTheme();
 
 export default function PatientRegister() {
+    const { setAuth } = useAuth();
 
     const [gender, setGender] = useState("");// State to hold the selected gender
     const navigate = useNavigate();
@@ -48,8 +43,6 @@ export default function PatientRegister() {
         const form = event.currentTarget;
         const formData = new FormData(form);
 
-
-
         const patientData = {
             patient: {
                 dob: selectedDate,
@@ -65,7 +58,7 @@ export default function PatientRegister() {
         };
 
         try {
-            console.log(patientData)
+            console.log(patientData);
             const response = await fetch('http://127.0.0.1:3000/patients', {
                 method: 'POST',
                 headers: {
@@ -75,15 +68,39 @@ export default function PatientRegister() {
             });
 
             if (response.ok) {
-                navigate("/patientlogin"); // Redirect upon successful submission
+                alert('Patient registered successfully. Please make an Appointment.');
+                // Prepare login data
+                const loginData = {
+                    username: formData.get('username'),
+                    password: formData.get('password')
+                };
+
+                // Perform login request
+                const loginResponse = await fetch('http://127.0.0.1:3000/patients/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(loginData)
+                });
+
+                if (loginResponse.ok) {
+                    const loginResult = await loginResponse.json();
+                    // Assuming the token is in loginResult.token
+                    localStorage.setItem('token', loginResult.token);
+                    setAuth({ isAuthenticated: true, role: loginResult.role, token: loginResult.token });
+                    navigate(`/patientappointment/${loginResult.patient_id}`); // Redirect upon successful login
+                } else {
+                    console.error('Failed to login:', loginResponse.statusText);
+                }
             } else {
                 console.error('Failed to submit form:', response.statusText);
-
             }
         } catch (error) {
             console.error('Error:', error);
         }
     };
+
 
     return (
         <ThemeProvider theme={defaultTheme}>

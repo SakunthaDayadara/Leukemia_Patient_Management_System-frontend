@@ -1,0 +1,12 @@
+/* NurseMakeAppointments.css */
+/* Red day */
+.MuiPickersDay-red.Mui-selected .MuiButtonBase-root {
+    background-color: red !important;
+    color: white !important;
+}
+
+/* Green day */
+.MuiPickersDay-green.Mui-selected .MuiButtonBase-root {
+    background-color: green !important;
+    color: white !important;
+}

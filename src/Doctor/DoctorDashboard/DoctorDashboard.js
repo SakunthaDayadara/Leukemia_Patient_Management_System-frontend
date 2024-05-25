@@ -13,9 +13,12 @@ import Badge from '@mui/material/Badge';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { patientmainListItems} from './PatientlistItems';
 
-import { Outlet} from 'react-router-dom';
+
+import {Outlet, useNavigate} from 'react-router-dom';
+import {doctormainListItems} from "./DoctorListItem";
+import useAuth from "../../Hooks/useAuth";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 
 
@@ -68,7 +71,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-export default function PatientDashboard() {
+export default function DoctorDashboard() {
     const [open, setOpen] = React.useState(true);
     const [userData, setUserData] = React.useState(null);
     const toggleDrawer = () => {
@@ -85,7 +88,7 @@ export default function PatientDashboard() {
                 }
 
                 // Fetch user data using token
-                const autoLoginResponse = await fetch('http://127.0.0.1:3000/patients/auto_login', {
+                const autoLoginResponse = await fetch('http://127.0.0.1:3000/staffautologin', {
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -97,19 +100,19 @@ export default function PatientDashboard() {
                 const autoLoginData = await autoLoginResponse.json();
 
                 // Fetch additional user info using user ID
-                const findPatientResponse = await fetch(`http://127.0.0.1:3000/patients/find_by_patient_id?patient_id=${autoLoginData.user_id}`, {
+                const findDoctorResponse = await fetch(`http://127.0.0.1:3000/doctors/find_by_doctor_id?doctor_id=${autoLoginData.user_id}`, {
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                if (!findPatientResponse.ok) {
+                if (!findDoctorResponse.ok) {
                     throw new Error('Failed to fetch user details');
                 }
-                const patientData = await findPatientResponse.json();
+                const doctorData = await findDoctorResponse.json();
 
                 // Update state with user data
-                setUserData(patientData);
+                setUserData(doctorData);
             } catch (error) {
                 console.error('Error fetching user data:', error);
             }
@@ -117,6 +120,17 @@ export default function PatientDashboard() {
 
         fetchUserData();
     }, []);
+
+
+    const { setAuth } = useAuth();
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        // Clear user session data
+        localStorage.removeItem('token');
+        setAuth({ isAuthenticated: false, role: null, token: null });
+        // Redirect to login page
+        navigate('/stafflogin');
+    };
 
 
     return (
@@ -149,11 +163,16 @@ export default function PatientDashboard() {
                             noWrap
                             sx={{ flexGrow: 1 }}
                         >
-                            {userData && userData.first_name && `Welcome, ${userData.first_name}`}
+                            {userData && userData.name && `Welcome, ${userData.name}`}
                         </Typography>
                         <IconButton color="inherit">
-                            <Badge badgeContent={4} color="secondary">
+                            <Badge color="secondary">
                                 <NotificationsIcon />
+                            </Badge>
+                        </IconButton>
+                        <IconButton color="inherit" onClick={handleLogout}>
+                            <Badge color="secondary">
+                                <LogoutIcon />
                             </Badge>
                         </IconButton>
                     </Toolbar>
@@ -173,7 +192,7 @@ export default function PatientDashboard() {
                     </Toolbar>
                     <Divider />
                     <List component="nav">
-                        {patientmainListItems}
+                        {doctormainListItems}
                     </List>
                 </Drawer>
 

@@ -4,10 +4,12 @@ import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import {useParams} from "react-router-dom";
+import MaterialTable from 'material-table';
+import {Link, Outlet, useNavigate} from "react-router-dom";
+import Button from "@mui/material/Button";
 
-function NurseConfirmPatient() {
-    const { patient_id } = useParams();
+function NursePatientManagement() {
+
 
 
     return (
@@ -31,19 +33,34 @@ function NurseConfirmPatient() {
                             sx={{
                                 p: 2,
                                 display: 'flex',
-                                flexDirection: 'column', // Change to column direction
+                                flexDirection: 'row',
                                 alignItems: 'center',
-                                height: '100%',
+                                height: 60,
                             }}
                         >
-
+                            <Button variant="contained" component={Link} to="/nursedashboard/patientmanagement" sx={{ mr: 2 }}>
+                                Initial Appointments
+                            </Button>
+                            <Button variant="contained" component={Link} to="/nursedashboard/patientmanagement/testdone" sx={{ mr: 2 }}>
+                                Test Done
+                            </Button>
+                            <Button variant="contained" component={Link} to="#" sx={{ mr: 2 }}>
+                                To Diagnose
+                            </Button>
+                            <Button variant="contained" component={Link} to="#" >
+                                To Admit
+                            </Button>
                         </Paper>
+
+                        <Outlet />
+
                     </Grid>
+
                 </Container>
+
             </Box>
         </React.Fragment>
     );
 }
 
-export default NurseConfirmPatient
-;
+export default NursePatientManagement;

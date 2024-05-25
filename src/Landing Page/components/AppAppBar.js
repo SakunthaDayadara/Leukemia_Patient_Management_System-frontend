@@ -11,7 +11,7 @@ import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
-import ToggleColorMode from './ToggleColorMode';
+import { Link } from 'react-router-dom';
 
 const logoStyle = {
   width: '140px',
@@ -145,9 +145,8 @@ function AppAppBar({ mode, toggleColorMode }) {
                 color="primary"
                 variant="text"
                 size="small"
-                component="a"
-                href="/stafflogin"
-                target="_blank"
+                component={Link} to="/stafflogin"
+
               >
                 Staff
               </Button>
@@ -155,9 +154,8 @@ function AppAppBar({ mode, toggleColorMode }) {
                 color="primary"
                 variant="contained"
                 size="small"
-                component="a"
-                href="/patientregister"
-                target="_blank"
+                component={Link} to="/patientregister"
+
               >
                   Register
               </Button>
@@ -165,9 +163,8 @@ function AppAppBar({ mode, toggleColorMode }) {
                     color="primary"
                     variant="contained"
                     size="small"
-                    component="a"
-                    href="/patientlogin"
-                    target="_blank"
+                    component={Link} to="/patientlogin"
+
                 >
                     Sign in
                 </Button>
@@ -223,24 +220,36 @@ function AppAppBar({ mode, toggleColorMode }) {
                       variant="contained"
                       component="a"
                       href="/patientlogin"
-                      target="_blank"
+
                       sx={{ width: '100%' }}
                     >
                       Sign in
                     </Button>
                   </MenuItem>
+                    <MenuItem>
+                        <Button
+                            color="primary"
+                            variant="contained"
+                            size="small"
+                            component={Link} to="/patientregister"
+                            sx={{ width: '100%' }}
+                        >
+                            Register
+                        </Button>
+                    </MenuItem>
                   <MenuItem>
                     <Button
                       color="primary"
                       variant="outlined"
                       component="a"
                       href="/stafflogin"
-                      target="_blank"
+
                       sx={{ width: '100%' }}
                     >
                       Staff
                     </Button>
                   </MenuItem>
+
                 </Box>
               </Drawer>
             </Box>

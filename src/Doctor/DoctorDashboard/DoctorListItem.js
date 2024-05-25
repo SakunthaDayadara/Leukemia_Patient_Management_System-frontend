@@ -6,33 +6,33 @@ import ListItemText from '@mui/material/ListItemText';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 
 
-export const nursemainListItems = (
+export const doctormainListItems = (
     <React.Fragment>
-        <ListItemButton component={Link} to="/nursedashboard">
+        <ListItemButton component={Link} to="/doctordashboard">
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
             <ListItemText primary="Dashboard" />
         </ListItemButton>
-        <ListItemButton component={Link} to="/nursedashboard/patientmanagement">
+        <ListItemButton component={Link} to="/doctordashboard/patientmanagement">
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
             <ListItemText primary="Patient Management" />
         </ListItemButton>
-        <ListItemButton component={Link} to="/nursedashboard/part2">
+        <ListItemButton component={Link} to="/doctordashboard/part2">
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
             <ListItemText primary="Part 2" />
         </ListItemButton>
-        <ListItemButton component={Link} to="/nursedashboard/part3">
+        <ListItemButton component={Link} to="/doctordashboard/part3">
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
             <ListItemText primary="Part 3" />
         </ListItemButton>
-        <ListItemButton component={Link} to="/nursedashboard/part4">
+        <ListItemButton component={Link} to="/doctordashboard/part4">
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>

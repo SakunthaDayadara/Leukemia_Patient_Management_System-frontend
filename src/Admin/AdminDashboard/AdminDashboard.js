@@ -15,8 +15,10 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 
 
-import { Outlet} from 'react-router-dom';
-import {nursemainListItems} from "./NurseListItem";
+import {Outlet, useNavigate} from 'react-router-dom';
+import {adminmainListItems} from "./AdminListItem";
+import useAuth from "../../Hooks/useAuth";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 
 
@@ -70,7 +72,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-export default function NurseDashboard() {
+export default function AdminDashboard() {
     const [open, setOpen] = React.useState(true);
     const [userData, setUserData] = React.useState(null);
     const toggleDrawer = () => {
@@ -99,19 +101,19 @@ export default function NurseDashboard() {
                 const autoLoginData = await autoLoginResponse.json();
 
                 // Fetch additional user info using user ID
-                const findNurseResponse = await fetch(`http://127.0.0.1:3000/nurses/find_by_nurse_id?nurse_id=${autoLoginData.user_id}`, {
+                const findAdminResponse = await fetch(`http://127.0.0.1:3000/admins/find_by_admin_id?admin_id=${autoLoginData.user_id}`, {
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                if (!findNurseResponse.ok) {
+                if (!findAdminResponse.ok) {
                     throw new Error('Failed to fetch user details');
                 }
-                const nurseData = await findNurseResponse.json();
+                const adminData = await findAdminResponse.json();
 
                 // Update state with user data
-                setUserData(nurseData);
+                setUserData(adminData);
             } catch (error) {
                 console.error('Error fetching user data:', error);
             }
@@ -119,6 +121,16 @@ export default function NurseDashboard() {
 
         fetchUserData();
     }, []);
+
+    const { setAuth } = useAuth();
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        // Clear user session data
+        localStorage.removeItem('token');
+        setAuth({ isAuthenticated: false, role: null, token: null });
+        // Redirect to login page
+        navigate('/stafflogin');
+    };
 
 
     return (
@@ -154,8 +166,13 @@ export default function NurseDashboard() {
                             {userData && userData.name && `Welcome, ${userData.name}`}
                         </Typography>
                         <IconButton color="inherit">
-                            <Badge badgeContent={4} color="secondary">
+                            <Badge color="secondary">
                                 <NotificationsIcon />
+                            </Badge>
+                        </IconButton>
+                        <IconButton color="inherit" onClick={handleLogout}>
+                            <Badge color="secondary">
+                                <LogoutIcon />
                             </Badge>
                         </IconButton>
                     </Toolbar>
@@ -175,7 +192,7 @@ export default function NurseDashboard() {
                     </Toolbar>
                     <Divider />
                     <List component="nav">
-                        {nursemainListItems}
+                        {adminmainListItems}
                     </List>
                 </Drawer>
 

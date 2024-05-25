@@ -6,33 +6,39 @@ import ListItemText from '@mui/material/ListItemText';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 
 
-export const doctormainListItems = (
+export const nursemainListItems = (
     <React.Fragment>
-        <ListItemButton component={Link} to="/doctordashboard">
+        <ListItemButton component={Link} to="/nursedashboard">
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
             <ListItemText primary="Dashboard" />
         </ListItemButton>
-        <ListItemButton component={Link} to="/doctordashboard/part1">
+        <ListItemButton component={Link} to="/nursedashboard/appointmentmanagement">
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
-            <ListItemText primary="Part 1" />
+            <ListItemText primary="Appointments" />
         </ListItemButton>
-        <ListItemButton component={Link} to="/doctordashboard/part2">
+        <ListItemButton component={Link} to="/nursedashboard/patientmanagement">
+            <ListItemIcon>
+                <DashboardIcon />
+            </ListItemIcon>
+            <ListItemText primary="Patient Management" />
+        </ListItemButton>
+        <ListItemButton component={Link} to="/nursedashboard/part2">
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
             <ListItemText primary="Part 2" />
         </ListItemButton>
-        <ListItemButton component={Link} to="/doctordashboard/part3">
+        <ListItemButton component={Link} to="/nursedashboard/part3">
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
             <ListItemText primary="Part 3" />
         </ListItemButton>
-        <ListItemButton component={Link} to="/doctordashboard/part4">
+        <ListItemButton component={Link} to="/nursedashboard/part4">
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
