@@ -40,7 +40,7 @@ export default function StaffLogin() {
                 username: data.get('username'),
                 password: data.get('password'),
             });
-            const response = await fetch('http://${process.env.REACT_APP_BACKEND_URL}/stafflogin', {
+            const response = await fetch('${process.env.REACT_APP_BACKEND_URL}/stafflogin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

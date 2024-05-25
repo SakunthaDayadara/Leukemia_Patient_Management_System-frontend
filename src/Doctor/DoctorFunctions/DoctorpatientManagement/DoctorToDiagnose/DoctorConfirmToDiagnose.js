@@ -15,7 +15,7 @@ function DoctorConfirmToDiagnose() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch(`http://${process.env.REACT_APP_BACKEND_URL}/appointments/find_by_patient_id?patient_id=${patient_id}`)
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/appointments/find_by_patient_id?patient_id=${patient_id}`)
             .then(response => response.json())
             .then(data => {
                 setAppointmentData(data[0]);
@@ -30,7 +30,7 @@ function DoctorConfirmToDiagnose() {
     };
 
     const handleConfirm = async () => {
-        const response = await fetch('http://${process.env.REACT_APP_BACKEND_URL}/patients/doctor_make_diagnose', {
+        const response = await fetch('${process.env.REACT_APP_BACKEND_URL}/patients/doctor_make_diagnose', {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

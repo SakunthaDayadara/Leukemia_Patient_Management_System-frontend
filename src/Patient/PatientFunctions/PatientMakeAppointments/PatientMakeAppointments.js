@@ -25,7 +25,7 @@ export default function PatientMakeAppointments() {
         // Fetch patient gender
         const fetchPatientData = async () => {
             try {
-                const response = await fetch(`http://${process.env.REACT_APP_BACKEND_URL}/patients/find_by_patient_id?patient_id=${patient_id}`);
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/patients/find_by_patient_id?patient_id=${patient_id}`);
                 const data = await response.json();
                 setGender(data.gender);
             } catch (error) {
@@ -41,7 +41,7 @@ export default function PatientMakeAppointments() {
         if (gender) {
             try {
                 const formattedDate = dayjs(date).format('YYYY-MM-DD');
-                const response = await fetch(`http://${process.env.REACT_APP_BACKEND_URL}/appointments/find_by_date_and_patient_gender?date=${formattedDate}&gender=${gender}`);
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/appointments/find_by_date_and_patient_gender?date=${formattedDate}&gender=${gender}`);
                 const data = await response.json();
                 setAppointments((prevAppointments) => ({
                     ...prevAppointments,
@@ -87,7 +87,7 @@ export default function PatientMakeAppointments() {
         };
 
         try {
-            const response = await fetch('http://${process.env.REACT_APP_BACKEND_URL}/appointments', {
+            const response = await fetch('${process.env.REACT_APP_BACKEND_URL}/appointments', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

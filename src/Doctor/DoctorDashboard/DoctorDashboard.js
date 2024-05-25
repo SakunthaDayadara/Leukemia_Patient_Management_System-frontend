@@ -88,7 +88,7 @@ export default function DoctorDashboard() {
                 }
 
                 // Fetch user data using token
-                const autoLoginResponse = await fetch('http://${process.env.REACT_APP_BACKEND_URL}/staffautologin', {
+                const autoLoginResponse = await fetch('${process.env.REACT_APP_BACKEND_URL}/staffautologin', {
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -100,7 +100,7 @@ export default function DoctorDashboard() {
                 const autoLoginData = await autoLoginResponse.json();
 
                 // Fetch additional user info using user ID
-                const findDoctorResponse = await fetch(`http://${process.env.REACT_APP_BACKEND_URL}/doctors/find_by_doctor_id?doctor_id=${autoLoginData.user_id}`, {
+                const findDoctorResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/doctors/find_by_doctor_id?doctor_id=${autoLoginData.user_id}`, {
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${token}`,

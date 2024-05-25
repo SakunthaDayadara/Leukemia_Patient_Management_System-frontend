@@ -81,7 +81,7 @@ export default function NurseDashboard() {
                     throw new Error('Token not found');
                 }
 
-                const autoLoginResponse = await fetch(`http://${process.env.REACT_APP_BACKEND_URL}/staffautologin`, {
+                const autoLoginResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/staffautologin`, {
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -92,7 +92,7 @@ export default function NurseDashboard() {
                 }
                 const autoLoginData = await autoLoginResponse.json();
 
-                const findNurseResponse = await fetch(`http://${process.env.REACT_APP_BACKEND_URL}/nurses/find_by_nurse_id?nurse_id=${autoLoginData.user_id}`, {
+                const findNurseResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/nurses/find_by_nurse_id?nurse_id=${autoLoginData.user_id}`, {
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${token}`,
