@@ -78,7 +78,7 @@ function NurseConfirmTestDone() {
         const token = localStorage.getItem('token');
         console.log({ patient_id, bmtUrl, fbcUrl, bpUrl });
         try {
-            const response1 = await fetch("http://127.0.0.1:3000/patients/make_to_diagnose", {
+            const response1 = await fetch("http://${process.env.REACT_APP_BACKEND_URL}/patients/make_to_diagnose", {
                 method: 'PATCH',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -91,7 +91,7 @@ function NurseConfirmTestDone() {
                 throw new Error('Failed to update patient to diagnose');
             }
 
-            const response2 = await fetch("http://127.0.0.1:3000/appointments/nurse_make_to_diagnose", {
+            const response2 = await fetch("http://${process.env.REACT_APP_BACKEND_URL}/appointments/nurse_make_to_diagnose", {
                 method: 'PATCH',
                 headers: {
                     'Authorization': `Bearer ${token}`,

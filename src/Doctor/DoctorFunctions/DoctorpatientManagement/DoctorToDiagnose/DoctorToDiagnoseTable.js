@@ -18,7 +18,7 @@ function DoctorToDiagnoseTable() {
 
     const fetchPatients = async () => {
         try {
-            const response = await fetch("http://127.0.0.1:3000/patients/to_diagnose");
+            const response = await fetch("http://${process.env.REACT_APP_BACKEND_URL}/patients/to_diagnose");
             const data = await response.json();
             setPatients(data);
         } catch (error) {
@@ -32,7 +32,7 @@ function DoctorToDiagnoseTable() {
 
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`http://127.0.0.1:3000/patients/delete_by_patient_id?patient_id=${rowData.patient_id}`, {
+            const response = await fetch(`http://${process.env.REACT_APP_BACKEND_URL}/patients/delete_by_patient_id?patient_id=${rowData.patient_id}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`,

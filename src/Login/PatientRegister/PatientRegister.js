@@ -59,7 +59,7 @@ export default function PatientRegister() {
 
         try {
             console.log(patientData);
-            const response = await fetch('http://127.0.0.1:3000/patients', {
+            const response = await fetch('http://${process.env.REACT_APP_BACKEND_URL}/patients', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -76,7 +76,7 @@ export default function PatientRegister() {
                 };
 
                 // Perform login request
-                const loginResponse = await fetch('http://127.0.0.1:3000/patients/login', {
+                const loginResponse = await fetch('http://${process.env.REACT_APP_BACKEND_URL}/patients/login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

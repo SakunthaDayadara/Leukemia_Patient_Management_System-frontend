@@ -39,7 +39,7 @@ function NurseConfirmInitialAppointment() {
         const token = localStorage.getItem('token');
 
         try {
-            const response1 = await fetch("http://127.0.0.1:3000/patients/make_test_done", {
+            const response1 = await fetch("http://${process.env.REACT_APP_BACKEND_URL}/patients/make_test_done", {
                 method: 'PATCH',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -55,7 +55,7 @@ function NurseConfirmInitialAppointment() {
                 throw new Error('Failed to update patient tests');
             }
 
-            const response2 = await fetch("http://127.0.0.1:3000/appointments/nurse_make_test_done", {
+            const response2 = await fetch("http://${process.env.REACT_APP_BACKEND_URL}/appointments/nurse_make_test_done", {
                 method: 'PATCH',
                 headers: {
                     'Authorization': `Bearer ${token}`,

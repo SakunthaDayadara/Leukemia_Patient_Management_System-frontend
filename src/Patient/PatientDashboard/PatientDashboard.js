@@ -87,7 +87,7 @@ export default function PatientDashboard() {
                 }
 
                 // Fetch user data using token
-                const autoLoginResponse = await fetch('http://127.0.0.1:3000/patients/auto_login', {
+                const autoLoginResponse = await fetch('http://${process.env.REACT_APP_BACKEND_URL}/patients/auto_login', {
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -99,7 +99,7 @@ export default function PatientDashboard() {
                 const autoLoginData = await autoLoginResponse.json();
 
                 // Fetch additional user info using user ID
-                const findPatientResponse = await fetch(`http://127.0.0.1:3000/patients/find_by_patient_id?patient_id=${autoLoginData.user_id}`, {
+                const findPatientResponse = await fetch(`http://${process.env.REACT_APP_BACKEND_URL}/patients/find_by_patient_id?patient_id=${autoLoginData.user_id}`, {
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${token}`,
