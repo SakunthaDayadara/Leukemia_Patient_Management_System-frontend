@@ -14,7 +14,7 @@ function NurseToAdmitTable() {
 
     const fetchPatients = async () => {
         try {
-            const response = await fetch("${process.env.REACT_APP_BACKEND_URL}/patients/to_admit_table");
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/patients/to_admit_table`);
             const data = await response.json();
             setPatients(data);
         } catch (error) {

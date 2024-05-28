@@ -13,7 +13,7 @@ function NurseOngoingAppointmentTable() {
 
     const fetchAppointments = async () => {
         try {
-            const response = await fetch("${process.env.REACT_APP_BACKEND_URL}/appointments/ongoing_appointment");
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/appointments/ongoing_appointment`);
             const data = await response.json();
             setAppointments(data);
         } catch (error) {

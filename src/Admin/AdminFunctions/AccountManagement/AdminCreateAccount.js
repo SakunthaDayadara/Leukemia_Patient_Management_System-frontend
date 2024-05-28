@@ -48,10 +48,10 @@ function AdminCreateAccount() {
         let payload = {};
 
         if (type === "doctor") {
-            url = "http://127.0.0.1:3000/doctors";
+            url = `${process.env.REACT_APP_BACKEND_URL}/doctors`;
             payload = { doctor: data };
         } else if (type === "nurse") {
-            url = "http://127.0.0.1:3000/nurses";
+            url = `${process.env.REACT_APP_BACKEND_URL}/nurses`;
             payload = { nurse: { ...data, ward_num: ward_num } };
         }
 

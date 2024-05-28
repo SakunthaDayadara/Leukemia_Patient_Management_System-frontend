@@ -44,6 +44,15 @@ function DoctorAdvanceDiagnose() {
                             <Button variant="contained" component={Link} to="/doctordashboard/advancediagnose/changecategory" sx={{ mr: 2 }}>
                                 Change Category
                             </Button>
+                            <Button variant="contained" component={Link} to="/doctordashboard/advancediagnose/changetreatment" sx={{ mr: 2 }}>
+                                Change Treatment
+                            </Button>
+                            <Button variant="contained" component={Link} to="/doctordashboard/advancediagnose/pausetreatment" sx={{ mr: 2 }}>
+                                Pause Treatment
+                            </Button>
+                            <Button variant="contained" component={Link} to="/doctordashboard/advancediagnose/resumetreatment" sx={{ mr: 2 }}>
+                                Resume Treatment
+                            </Button>
 
                         </Paper>
 

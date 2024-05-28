@@ -52,6 +52,18 @@ import DoctorToCategorizeTable
   from "./Doctor/DoctorFunctions/DoctorAdvanceDiagnose/DoctorToCategorize/DoctorToCategorizeTable";
 import DoctorConfirmCategorize
   from "./Doctor/DoctorFunctions/DoctorAdvanceDiagnose/DoctorToCategorize/DoctorConfirmCategorize";
+import DoctorChangeCategoryTable
+  from "./Doctor/DoctorFunctions/DoctorAdvanceDiagnose/DoctorChangeCategory/DoctorChangeCategoryTable";
+import DoctorChangeTreatmentTable
+  from "./Doctor/DoctorFunctions/DoctorAdvanceDiagnose/DoctorChangeTreatment/DoctorChangeTreatmentTable";
+import DoctorPauseTreatmentTable
+  from "./Doctor/DoctorFunctions/DoctorAdvanceDiagnose/DoctorPauseTreatment/DoctorPauseTreatmentTable";
+import DoctorResumeTreatmentTable
+  from "./Doctor/DoctorFunctions/DoctorAdvanceDiagnose/DoctorResumeTreatment/DoctorResumeTreatmentTable";
+import DoctorConfirmChangeCategory
+  from "./Doctor/DoctorFunctions/DoctorAdvanceDiagnose/DoctorChangeCategory/DoctorConfirmChangeCategory";
+import DoctorConfirmChangeTreatment
+  from "./Doctor/DoctorFunctions/DoctorAdvanceDiagnose/DoctorChangeTreatment/DoctorConfirmChangeTreatment";
 
 function App() {
   return (
@@ -83,6 +95,13 @@ function App() {
               <Route path="advancediagnose" element={<DoctorAdvanceDiagnose />}>
                 <Route path="" element={<DoctorToCategorizeTable />}></Route>
                 <Route path="tocatagorize/:patient_id" element={<DoctorConfirmCategorize />}></Route>
+                <Route path="changecategory" element={<DoctorChangeCategoryTable />}></Route>
+                <Route path="changecategory/:patient_id" element={<DoctorConfirmChangeCategory />}></Route>
+                <Route path="changetreatment" element={<DoctorChangeTreatmentTable />}></Route>
+                <Route path="changetreatment/:patient_id" element={<DoctorConfirmChangeTreatment />}></Route>
+                <Route path="pausetreatment" element={<DoctorPauseTreatmentTable />}></Route>
+                <Route path="resumetreatment" element={<DoctorResumeTreatmentTable />}></Route>
+
               </Route>
               <Route path="part3"></Route>
               <Route path="part4"></Route>

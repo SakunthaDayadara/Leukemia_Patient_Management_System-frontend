@@ -87,7 +87,7 @@ export default function PatientDashboard() {
                 }
 
                 // Fetch user data using token
-                const autoLoginResponse = await fetch('${process.env.REACT_APP_BACKEND_URL}/patients/auto_login', {
+                const autoLoginResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/patients/auto_login`, {
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${token}`,

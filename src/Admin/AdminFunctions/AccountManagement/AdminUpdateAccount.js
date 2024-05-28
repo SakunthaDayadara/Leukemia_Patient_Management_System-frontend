@@ -26,9 +26,9 @@ function AdminUpdateAccount() {
         // Define the endpoint based on the selected type
         let endpoint = "";
         if (type === "doctor") {
-            endpoint = `http://127.0.0.1:3000/doctors/find_by_doctor_id?doctor_id=${user_id}`;
+            endpoint = `${process.env.REACT_APP_BACKEND_URL}/doctors/find_by_doctor_id?doctor_id=${user_id}`;
         } else if (type === "nurse") {
-            endpoint = `http://127.0.0.1:3000/nurses/find_by_nurse_id?nurse_id=${user_id}`;
+            endpoint = `${process.env.REACT_APP_BACKEND_URL}/nurses/find_by_nurse_id?nurse_id=${user_id}`;
         }
 
         // Retrieve token from local storage

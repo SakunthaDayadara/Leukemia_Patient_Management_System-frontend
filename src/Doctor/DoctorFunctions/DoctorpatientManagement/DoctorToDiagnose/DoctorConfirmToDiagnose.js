@@ -30,7 +30,7 @@ function DoctorConfirmToDiagnose() {
     };
 
     const handleConfirm = async () => {
-        const response = await fetch('${process.env.REACT_APP_BACKEND_URL}/patients/doctor_make_diagnose', {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/patients/doctor_make_diagnose`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

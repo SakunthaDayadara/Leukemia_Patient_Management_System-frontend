@@ -18,7 +18,7 @@ function DoctorToDiagnoseTable() {
 
     const fetchPatients = async () => {
         try {
-            const response = await fetch("${process.env.REACT_APP_BACKEND_URL}/patients/to_diagnose");
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/patients/to_diagnose`);
             const data = await response.json();
             setPatients(data);
         } catch (error) {

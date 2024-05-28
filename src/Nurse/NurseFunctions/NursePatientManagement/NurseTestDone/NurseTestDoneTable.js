@@ -14,7 +14,7 @@ function NurseTestDoneTable() {
 
     const fetchPatients = async () => {
         try {
-            const response = await fetch("${process.env.REACT_APP_BACKEND_URL}/patients/test_done");
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/patients/test_done`);
             const data = await response.json();
             setPatients(data);
         } catch (error) {

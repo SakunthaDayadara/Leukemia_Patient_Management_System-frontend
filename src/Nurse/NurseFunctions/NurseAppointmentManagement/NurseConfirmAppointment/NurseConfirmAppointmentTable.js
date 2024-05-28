@@ -13,7 +13,7 @@ function NurseConfirmAppointmentTable() {
 
     const fetchAppointments = async () => {
         try {
-            const response = await fetch("${process.env.REACT_APP_BACKEND_URL}/appointments/confirm_appointment");
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/appointments/confirm_appointment`);
             const data = await response.json();
             setAppointments(data);
         } catch (error) {
