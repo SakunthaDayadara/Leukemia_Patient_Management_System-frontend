@@ -26,11 +26,11 @@ export const nursemainListItems = (
             </ListItemIcon>
             <ListItemText primary="Patient Management" />
         </ListItemButton>
-        <ListItemButton component={Link} to="/nursedashboard/part2">
+        <ListItemButton component={Link} to="/nursedashboard/treatment">
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
-            <ListItemText primary="Part 2" />
+            <ListItemText primary="Treatment" />
         </ListItemButton>
         <ListItemButton component={Link} to="/nursedashboard/part3">
             <ListItemIcon>

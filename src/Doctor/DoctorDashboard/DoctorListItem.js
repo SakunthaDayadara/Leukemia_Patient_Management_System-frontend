@@ -26,11 +26,11 @@ export const doctormainListItems = (
             </ListItemIcon>
             <ListItemText primary="Advance Diagnose" />
         </ListItemButton>
-        <ListItemButton component={Link} to="/doctordashboard/part3">
+        <ListItemButton component={Link} to="/doctordashboard/referral">
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
-            <ListItemText primary="Part 3" />
+            <ListItemText primary="Referral" />
         </ListItemButton>
         <ListItemButton component={Link} to="/doctordashboard/part4">
             <ListItemIcon>

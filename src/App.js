@@ -64,6 +64,20 @@ import DoctorConfirmChangeCategory
   from "./Doctor/DoctorFunctions/DoctorAdvanceDiagnose/DoctorChangeCategory/DoctorConfirmChangeCategory";
 import DoctorConfirmChangeTreatment
   from "./Doctor/DoctorFunctions/DoctorAdvanceDiagnose/DoctorChangeTreatment/DoctorConfirmChangeTreatment";
+import DoctorReference from "./Doctor/DoctorFunctions/DoctorReference/DoctorReference";
+import DoctorMakeReferenceTable
+  from "./Doctor/DoctorFunctions/DoctorReference/DoctorMakeReference/DoctorMakeReferenceTable";
+import DoctorConfirmReference
+  from "./Doctor/DoctorFunctions/DoctorReference/DoctorMakeReference/DoctorConfirmReference";
+import DoctorIncomingReferenceTable
+  from "./Doctor/DoctorFunctions/DoctorReference/DoctorIncomingReference/DoctorIncomingReferenceTable";
+import NurseTreatmentRecords from "./Nurse/NurseFunctions/NurseTreatmentRecords/NurseTreatmentRecords";
+import NurseNewTreatmentTable
+  from "./Nurse/NurseFunctions/NurseTreatmentRecords/NurseNewTreatment/NurseNewTreatmentTable";
+import NurseConfirmNewRecord
+  from "./Nurse/NurseFunctions/NurseTreatmentRecords/NurseNewTreatment/NurseConfirmNewRecord";
+import NursePendingTreatmentTable
+  from "./Nurse/NurseFunctions/NurseTreatmentRecords/NursePendingTreatment/NursePendingTreatmentTable";
 
 function App() {
   return (
@@ -101,6 +115,12 @@ function App() {
                 <Route path="changetreatment/:patient_id" element={<DoctorConfirmChangeTreatment />}></Route>
                 <Route path="pausetreatment" element={<DoctorPauseTreatmentTable />}></Route>
                 <Route path="resumetreatment" element={<DoctorResumeTreatmentTable />}></Route>
+              </Route>
+              <Route path="referral" element={<DoctorReference />}>
+                <Route path="" element={<DoctorMakeReferenceTable />}></Route>
+                <Route path="makereferral/:patient_id" element={<DoctorConfirmReference />}></Route>
+                <Route path="incomingreferral" element={<DoctorIncomingReferenceTable />}></Route>
+
 
               </Route>
               <Route path="part3"></Route>
@@ -143,6 +163,13 @@ function App() {
                 <Route path="toadmit/:patient_id" element={<NurseConfirmToAdmit />}></Route>
                 <Route path="admitted" element={<NurseAdmittedTable />}></Route>
                 <Route path="admitted/:patient_id" element={<NurseDischargePatient />}></Route>
+              </Route>
+              <Route path="treatment" element={<NurseTreatmentRecords />}>
+                <Route path="" element={<NurseNewTreatmentTable />} ></Route>
+                <Route path="newtreatment/:patient_id" element={<NurseConfirmNewRecord />}></Route>
+                <Route path="pendingtreatment" element={<NursePendingTreatmentTable />}></Route>
+                <Route path="pendingtreatment/:treatment_record_id"></Route>
+
               </Route>
               <Route path="part3"></Route>
               <Route path="part4"></Route>
