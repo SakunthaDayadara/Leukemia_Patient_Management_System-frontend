@@ -14,14 +14,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import LogoutIcon from '@mui/icons-material/Logout';
-
-
-import {Outlet, useNavigate,} from 'react-router-dom';
-import {nursemainListItems} from "./NurseListItem";
+import { Outlet, useNavigate } from 'react-router-dom';
+import { nursemainListItems } from "./NurseListItem";
 import useAuth from "../../Hooks/useAuth";
-
-
-
 
 const drawerWidth = 240;
 
@@ -69,7 +64,6 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 );
 
-// TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
 export default function NurseDashboard() {
@@ -82,14 +76,12 @@ export default function NurseDashboard() {
     React.useEffect(() => {
         const fetchUserData = async () => {
             try {
-                // Fetch token from local storage
                 const token = localStorage.getItem('token');
                 if (!token) {
                     throw new Error('Token not found');
                 }
 
-                // Fetch user data using token
-                const autoLoginResponse = await fetch('http://127.0.0.1:3000/staffautologin', {
+                const autoLoginResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/staffautologin`, {
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -100,8 +92,7 @@ export default function NurseDashboard() {
                 }
                 const autoLoginData = await autoLoginResponse.json();
 
-                // Fetch additional user info using user ID
-                const findNurseResponse = await fetch(`http://127.0.0.1:3000/nurses/find_by_nurse_id?nurse_id=${autoLoginData.user_id}`, {
+                const findNurseResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/nurses/find_by_nurse_id?nurse_id=${autoLoginData.user_id}`, {
                     method: 'GET',
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -112,7 +103,6 @@ export default function NurseDashboard() {
                 }
                 const nurseData = await findNurseResponse.json();
 
-                // Update state with user data
                 setUserData(nurseData);
             } catch (error) {
                 console.error('Error fetching user data:', error);
@@ -122,20 +112,15 @@ export default function NurseDashboard() {
         fetchUserData();
     }, []);
 
-
     const { setAuth } = useAuth();
     const navigate = useNavigate();
     const handleLogout = () => {
-        // Clear user session data
         localStorage.removeItem('token');
         setAuth({ isAuthenticated: false, role: null, token: null });
-        // Redirect to login page
         navigate('/stafflogin');
     };
 
-
     return (
-
         <ThemeProvider theme={defaultTheme}>
             <Box sx={{ display: 'flex' }}>
                 <CssBaseline />
@@ -198,9 +183,7 @@ export default function NurseDashboard() {
                 </Drawer>
 
                 <Outlet />
-
             </Box>
         </ThemeProvider>
-
     );
 }

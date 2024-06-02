@@ -17,7 +17,7 @@ function NurseConfirmAppointment() {
 
     const fetchAppointment = async () => {
         try {
-            const response = await fetch(`http://127.0.0.1:3000/appointments/find_by_appointment_id?appointment_id=${appointment_id}`);
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/appointments/find_by_appointment_id?appointment_id=${appointment_id}`);
             const data = await response.json();
             setAppointment(data);
         } catch (error) {
@@ -33,7 +33,7 @@ function NurseConfirmAppointment() {
             }
 
             // Fetch user data using token
-            const autoLoginResponse = await fetch('http://127.0.0.1:3000/staffautologin', {
+            const autoLoginResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/staffautologin`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -57,7 +57,7 @@ function NurseConfirmAppointment() {
     const handleConfirm = async () => {
         try {
             // First PATCH request to confirm the appointment
-            const responseConfirm = await fetch(`http://127.0.0.1:3000/appointments/nurse_confirm_appointment`, {
+            const responseConfirm = await fetch(`${process.env.REACT_APP_BACKEND_URL}/appointments/nurse_confirm_appointment`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
@@ -74,7 +74,7 @@ function NurseConfirmAppointment() {
             }
 
             // Second PATCH request to make the appointment for the patient
-            const responseMakeAppointment = await fetch(`http://127.0.0.1:3000/patients/make_appointment`, {
+            const responseMakeAppointment = await fetch(`${process.env.REACT_APP_BACKEND_URL}/patients/make_appointment`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'

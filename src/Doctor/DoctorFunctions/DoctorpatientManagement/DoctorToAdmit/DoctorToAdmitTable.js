@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import MaterialTable from 'material-table';
 import {Link, Outlet, useNavigate} from "react-router-dom";
-import Button from "@mui/material/Button";
 
-function DoctorToDiagnoseTable() {
+
+function DoctorToAdmitTable() {
     const navigate = useNavigate();
     const [patients, setPatients] = useState([]);
 
@@ -18,7 +14,7 @@ function DoctorToDiagnoseTable() {
 
     const fetchPatients = async () => {
         try {
-            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/patients/to_diagnose`);
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/patients/to_admit_table`);
             const data = await response.json();
             setPatients(data);
         } catch (error) {
@@ -87,24 +83,7 @@ function DoctorToDiagnoseTable() {
                         pageSizeOptions: [5, 10, 20],
                     }}
 
-                    actions={[
-                        {
-                            icon: 'edit',
-                            tooltip: 'Edit Patient',
-                            onClick: (event, rowData) => {
-                                navigate(`/doctordashboard/patientmanagement/todiagnose/${rowData.patient_id}`);
-                                console.log('Edit patient:', rowData);
-                            }
-                        },
-                        {
-                            icon: 'delete',
-                            tooltip: 'Delete Patient',
-                            onClick: (event, rowData) => {
-                                handleDelete(rowData);
-                                console.log('Delete patient:', rowData);
-                            }
-                        }
-                    ]}
+
                 />
             </Paper>
 
@@ -113,4 +92,4 @@ function DoctorToDiagnoseTable() {
     );
 }
 
-export default DoctorToDiagnoseTable;
+export default DoctorToAdmitTable;

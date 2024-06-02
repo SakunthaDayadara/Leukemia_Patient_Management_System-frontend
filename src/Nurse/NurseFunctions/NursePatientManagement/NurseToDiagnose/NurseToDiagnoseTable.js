@@ -4,7 +4,7 @@ import MaterialTable from 'material-table';
 import {Link, Outlet, useNavigate} from "react-router-dom";
 
 
-function NurseTestDoneTable() {
+function NurseToDiagnoseTable() {
     const navigate = useNavigate();
     const [patients, setPatients] = useState([]);
 
@@ -14,7 +14,7 @@ function NurseTestDoneTable() {
 
     const fetchPatients = async () => {
         try {
-            const response = await fetch("http://127.0.0.1:3000/patients/test_done");
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/patients/to_diagnose`);
             const data = await response.json();
             setPatients(data);
         } catch (error) {
@@ -28,7 +28,7 @@ function NurseTestDoneTable() {
 
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch(`http://127.0.0.1:3000/patients/delete_by_patient_id?patient_id=${rowData.patient_id}`, {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/patients/delete_by_patient_id?patient_id=${rowData.patient_id}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -83,24 +83,7 @@ function NurseTestDoneTable() {
                         pageSizeOptions: [5, 10, 20],
                     }}
 
-                    actions={[
-                        {
-                            icon: 'edit',
-                            tooltip: 'Edit Patient',
-                            onClick: (event, rowData) => {
-                                navigate(`/nursedashboard/patientmanagement/testdone/${rowData.patient_id}`);
-                                console.log('Edit patient:', rowData);
-                            }
-                        },
-                        {
-                            icon: 'delete',
-                            tooltip: 'Delete Patient',
-                            onClick: (event, rowData) => {
-                                handleDelete(rowData);
-                                console.log('Delete patient:', rowData);
-                            }
-                        }
-                    ]}
+
                 />
             </Paper>
 
@@ -109,4 +92,4 @@ function NurseTestDoneTable() {
     );
 }
 
-export default NurseTestDoneTable;
+export default NurseToDiagnoseTable;

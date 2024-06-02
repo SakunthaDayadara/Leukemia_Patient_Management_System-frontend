@@ -35,10 +35,10 @@ function AdminUpdateAccountPassword() {
         let requestBody = {};
 
         if (type === "doctor") {
-            endpoint = "http://127.0.0.1:3000/doctors/reset_password";
+            endpoint = `${process.env.REACT_APP_BACKEND_URL}/doctors/reset_password`;
             requestBody = { doctor_id: user_id, password: password };
         } else if (type === "nurse") {
-            endpoint = "http://127.0.0.1:3000/nurses/reset_password";
+            endpoint = `${process.env.REACT_APP_BACKEND_URL}/nurses/reset_password`;
             requestBody = { nurse_id: user_id, password: password };
         }
 

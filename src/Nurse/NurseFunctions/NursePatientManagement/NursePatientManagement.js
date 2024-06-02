@@ -44,11 +44,14 @@ function NursePatientManagement() {
                             <Button variant="contained" component={Link} to="/nursedashboard/patientmanagement/testdone" sx={{ mr: 2 }}>
                                 Test Done
                             </Button>
-                            <Button variant="contained" component={Link} to="#" sx={{ mr: 2 }}>
+                            <Button variant="contained" component={Link} to="/nursedashboard/patientmanagement/todiagnose" sx={{ mr: 2 }}>
                                 To Diagnose
                             </Button>
-                            <Button variant="contained" component={Link} to="#" >
+                            <Button variant="contained" component={Link} to="/nursedashboard/patientmanagement/toadmit" sx={{ mr: 2 }}>
                                 To Admit
+                            </Button>
+                            <Button variant="contained" component={Link} to="/nursedashboard/patientmanagement/admitted" sx={{ mr: 2 }}>
+                                Admitted
                             </Button>
                         </Paper>
 

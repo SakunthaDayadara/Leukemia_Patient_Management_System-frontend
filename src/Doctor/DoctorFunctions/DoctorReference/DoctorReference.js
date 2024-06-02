@@ -8,7 +8,7 @@ import MaterialTable from 'material-table';
 import {Link, Outlet, useNavigate} from "react-router-dom";
 import Button from "@mui/material/Button";
 
-function DoctorPatientManagement() {
+function DoctorReference() {
 
 
 
@@ -38,11 +38,11 @@ function DoctorPatientManagement() {
                                 height: 60,
                             }}
                         >
-                            <Button variant="contained" component={Link} to="/doctordashboard/patientmanagement" sx={{ mr: 2 }}>
-                                To Diagnose
+                            <Button variant="contained" component={Link} to="/doctordashboard/referral" sx={{ mr: 2 }}>
+                                Make Referral
                             </Button>
-                            <Button variant="contained" component={Link} to="/doctordashboard/patientmanagement/toadmit" sx={{ mr: 2 }}>
-                                To Admit
+                            <Button variant="contained" component={Link} to="/doctordashboard/referral/incomingreferral" sx={{ mr: 2 }}>
+                                Incoming Referral
                             </Button>
 
                         </Paper>
@@ -58,4 +58,4 @@ function DoctorPatientManagement() {
     );
 }
 
-export default DoctorPatientManagement;
+export default DoctorReference;

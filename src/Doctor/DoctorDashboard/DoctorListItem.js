@@ -20,17 +20,17 @@ export const doctormainListItems = (
             </ListItemIcon>
             <ListItemText primary="Patient Management" />
         </ListItemButton>
-        <ListItemButton component={Link} to="/doctordashboard/part2">
+        <ListItemButton component={Link} to="/doctordashboard/advancediagnose">
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
-            <ListItemText primary="Part 2" />
+            <ListItemText primary="Advance Diagnose" />
         </ListItemButton>
-        <ListItemButton component={Link} to="/doctordashboard/part3">
+        <ListItemButton component={Link} to="/doctordashboard/referral">
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
-            <ListItemText primary="Part 3" />
+            <ListItemText primary="Referral" />
         </ListItemButton>
         <ListItemButton component={Link} to="/doctordashboard/part4">
             <ListItemIcon>

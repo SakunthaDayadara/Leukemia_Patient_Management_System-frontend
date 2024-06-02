@@ -25,7 +25,7 @@ export default function PatientMakeAppointments() {
         // Fetch patient gender
         const fetchPatientData = async () => {
             try {
-                const response = await fetch(`http://127.0.0.1:3000/patients/find_by_patient_id?patient_id=${patient_id}`);
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/patients/find_by_patient_id?patient_id=${patient_id}`);
                 const data = await response.json();
                 setGender(data.gender);
             } catch (error) {
@@ -41,7 +41,7 @@ export default function PatientMakeAppointments() {
         if (gender) {
             try {
                 const formattedDate = dayjs(date).format('YYYY-MM-DD');
-                const response = await fetch(`http://127.0.0.1:3000/appointments/find_by_date_and_patient_gender?date=${formattedDate}&gender=${gender}`);
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/appointments/find_by_date_and_patient_gender?date=${formattedDate}&gender=${gender}`);
                 const data = await response.json();
                 setAppointments((prevAppointments) => ({
                     ...prevAppointments,
@@ -87,7 +87,7 @@ export default function PatientMakeAppointments() {
         };
 
         try {
-            const response = await fetch('http://127.0.0.1:3000/appointments', {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/appointments`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -109,11 +109,11 @@ export default function PatientMakeAppointments() {
         }
     };
 
-    // Function to disable dates that are not Monday, Tuesday, or Thursday
+    // Function to disable dates that are not Monday, Tuesday, or Thursday and dates before today
     const shouldDisableDate = (date) => {
         const day = dayjs(date).day();
-        // Allow only Monday (1), Tuesday (2), or Thursday (4)
-        return !(day === 1 || day === 2 || day === 4);
+        const today = dayjs().startOf('day');
+        return !(day === 1 || day === 2 || day === 4) || dayjs(date).isBefore(today);
     };
 
     // Function to determine if a date should be marked red or green
@@ -151,9 +151,9 @@ export default function PatientMakeAppointments() {
                                     shouldDisableDate={shouldDisableDate}
                                     renderDay={(day, _value, DayComponentProps) => {
                                         const dayClassName = getDayClassName(day);
-                                        const selectedDate = dayjs(selectedDate).format('YYYY-MM-DD');
-                                        const isCurrentDate = dayjs(day).format('YYYY-MM-DD') === selectedDate;
-                                        const className = `${dayClassName} MuiPickersDay-${isCurrentDate ? 'red' : 'green'}`;
+                                        const formattedDate = dayjs(selectedDate).format('YYYY-MM-DD');
+                                        const isCurrentDate = dayjs(day).format('YYYY-MM-DD') === formattedDate;
+                                        const className = `${dayClassName} ${isCurrentDate ? 'selected-day' : ''}`;
                                         return (
                                             <div className={className}>
                                                 <PickersDay {...DayComponentProps} />
