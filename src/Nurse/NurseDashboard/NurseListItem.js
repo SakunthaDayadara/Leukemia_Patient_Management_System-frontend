@@ -32,11 +32,11 @@ export const nursemainListItems = (
             </ListItemIcon>
             <ListItemText primary="Treatment" />
         </ListItemButton>
-        <ListItemButton component={Link} to="/nursedashboard/part3">
+        <ListItemButton component={Link} to="/nursedashboard/test">
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
-            <ListItemText primary="Part 3" />
+            <ListItemText primary="Test" />
         </ListItemButton>
         <ListItemButton component={Link} to="/nursedashboard/part4">
             <ListItemIcon>

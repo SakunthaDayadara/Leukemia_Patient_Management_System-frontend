@@ -32,11 +32,17 @@ export const doctormainListItems = (
             </ListItemIcon>
             <ListItemText primary="Referral" />
         </ListItemButton>
-        <ListItemButton component={Link} to="/doctordashboard/part4">
+        <ListItemButton component={Link} to="/doctordashboard/test">
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
-            <ListItemText primary="Part 4" />
+            <ListItemText primary="Test" />
+        </ListItemButton>
+        <ListItemButton component={Link} to="/doctordashboard/#">
+            <ListItemIcon>
+                <DashboardIcon />
+            </ListItemIcon>
+            <ListItemText primary="Part 5" />
         </ListItemButton>
     </React.Fragment>
 );

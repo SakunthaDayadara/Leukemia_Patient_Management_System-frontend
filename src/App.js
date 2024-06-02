@@ -78,6 +78,14 @@ import NurseConfirmNewRecord
   from "./Nurse/NurseFunctions/NurseTreatmentRecords/NurseNewTreatment/NurseConfirmNewRecord";
 import NursePendingTreatmentTable
   from "./Nurse/NurseFunctions/NurseTreatmentRecords/NursePendingTreatment/NursePendingTreatmentTable";
+import DoctorTest from "./Doctor/DoctorFunctions/DoctorTest/DoctorTest";
+import DoctorRequestTest from "./Doctor/DoctorFunctions/DoctorTest/DoctorRequestTest/DoctorRequestTest";
+import NurseTest from "./Nurse/NurseFunctions/NurseTest/NurseTest";
+import NurseRequestedTestTable from "./Nurse/NurseFunctions/NurseTest/NurseRequestedTest/NurseRequestedTestTable";
+import NurseConfirmRequestedTest from "./Nurse/NurseFunctions/NurseTest/NurseRequestedTest/NurseConfirmRequestedTest";
+import NurseScheduledTestTable from "./Nurse/NurseFunctions/NurseTest/NurseScheduledTest/NurseScheduledTestTable";
+import DoctorPendingTestTable from "./Doctor/DoctorFunctions/DoctorTest/DoctorPendingTest/DoctorPendingTestTable";
+import NurseConfirmScheduledTest from "./Nurse/NurseFunctions/NurseTest/NurseScheduledTest/NurseConfirmScheduledTest";
 
 function App() {
   return (
@@ -120,8 +128,10 @@ function App() {
                 <Route path="" element={<DoctorMakeReferenceTable />}></Route>
                 <Route path="makereferral/:patient_id" element={<DoctorConfirmReference />}></Route>
                 <Route path="incomingreferral" element={<DoctorIncomingReferenceTable />}></Route>
-
-
+              </Route>
+              <Route path="test" element={<DoctorTest />}>
+                <Route path="" element={<DoctorRequestTest />} ></Route>
+                <Route path="pendingtest" element={<DoctorPendingTestTable />} ></Route>
               </Route>
               <Route path="part3"></Route>
               <Route path="part4"></Route>
@@ -171,6 +181,13 @@ function App() {
                 <Route path="pendingtreatment/:treatment_record_id"></Route>
 
               </Route>
+              <Route path="test" element={<NurseTest />}>
+                <Route path="" element={<NurseRequestedTestTable />} ></Route>
+                <Route path="requestedtest/:test_id" element={<NurseConfirmRequestedTest />}></Route>
+                <Route path="scheduledtest" element={<NurseScheduledTestTable />}></Route>
+                <Route path="scheduledtest/:test_id" element={<NurseConfirmScheduledTest />}></Route>
+              </Route>
+
               <Route path="part3"></Route>
               <Route path="part4"></Route>
             </Route>
