@@ -5,7 +5,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import LandingPage from "./Landing Page/LandingPage";
 import PatientLogin from "./Login/PatientLogin/PatientLogin";
 import PatientDashboard from "./Patient/PatientDashboard/PatientDashboard";
-import PatientDashpage from "./Patient/PatientDashboard/PatientDashpage";
+import PatientDashpage from "./Patient/PatientDashboard/PatientDashpage/PatientDashpage";
 import StaffLogin from "./Login/StaffLogin/StaffLogin";
 import DoctorDashboard from "./Doctor/DoctorDashboard/DoctorDashboard";
 import AdminDashboard from "./Admin/AdminDashboard/AdminDashboard";
@@ -86,6 +86,18 @@ import NurseConfirmRequestedTest from "./Nurse/NurseFunctions/NurseTest/NurseReq
 import NurseScheduledTestTable from "./Nurse/NurseFunctions/NurseTest/NurseScheduledTest/NurseScheduledTestTable";
 import DoctorPendingTestTable from "./Doctor/DoctorFunctions/DoctorTest/DoctorPendingTest/DoctorPendingTestTable";
 import NurseConfirmScheduledTest from "./Nurse/NurseFunctions/NurseTest/NurseScheduledTest/NurseConfirmScheduledTest";
+import DoctorClinic from "./Doctor/DoctorFunctions/DoctorClinic/DoctorClinic";
+import DoctorMakeClinic from "./Doctor/DoctorFunctions/DoctorClinic/DoctorMakeClinic/DoctorMakeClinic";
+import DoctorScheduledClinic from "./Doctor/DoctorFunctions/DoctorClinic/DoctorScheduledClinic/DoctorScheduledClinic";
+import NurseClinic from "./Nurse/NurseFunctions/NurseClinic/NurseClinic";
+import NurseScheduledClinicTable
+  from "./Nurse/NurseFunctions/NurseClinic/NurseScheduledClinic/NurseScheduledClinicTable";
+import DoctorOngoingClinicTable
+  from "./Doctor/DoctorFunctions/DoctorClinic/DoctorOngoingClinic/DoctorOngoingClinicTable";
+import PatientClinicHistoryTable from "./Patient/PatientFunctions/PatientClinicHistory/PatientClinicHistoryTable";
+import PatientTestHistoryTable
+  from "./Patient/PatientFunctions/PatientTestHistory/PatientTestHistoryTable";
+import PatientTreatmentHistoryTable from "./Patient/PatientFunctions/PatientTreatmentHistory/PatientTreatmentHistoryTable";
 
 function App() {
   return (
@@ -100,9 +112,9 @@ function App() {
             <Route path='/patientappointment/:patient_id' element={<PatientMakeAppointments />}></Route>
             <Route path='/patientdashboard' element={<PatientDashboard />}>
               <Route path="" element={<PatientDashpage />} ></Route>
-              <Route path="part1"></Route>
-              <Route path="part2"></Route>
-              <Route path="part3"></Route>
+              <Route path="clinichistory" element={<PatientClinicHistoryTable />}></Route>
+              <Route path="treatmenthistory" element={<PatientTreatmentHistoryTable />}></Route>
+              <Route path="testhistory" element={<PatientTestHistoryTable />}></Route>
               <Route path="part4"></Route>
             </Route>
           </Route>
@@ -133,7 +145,11 @@ function App() {
                 <Route path="" element={<DoctorRequestTest />} ></Route>
                 <Route path="pendingtest" element={<DoctorPendingTestTable />} ></Route>
               </Route>
-              <Route path="part3"></Route>
+              <Route path="clinic" element={<DoctorClinic />}>
+                <Route path="" element={<DoctorMakeClinic />}></Route>
+                <Route path="scheduledclinic" element={<DoctorScheduledClinic />}></Route>
+                <Route path="ongoingclinic" element={<DoctorOngoingClinicTable />}></Route>
+              </Route>
               <Route path="part4"></Route>
             </Route>
           </Route>
@@ -186,6 +202,11 @@ function App() {
                 <Route path="requestedtest/:test_id" element={<NurseConfirmRequestedTest />}></Route>
                 <Route path="scheduledtest" element={<NurseScheduledTestTable />}></Route>
                 <Route path="scheduledtest/:test_id" element={<NurseConfirmScheduledTest />}></Route>
+              </Route>
+              <Route path="clinic" element={<NurseClinic />}>
+                    <Route path="" element={<NurseScheduledClinicTable />}></Route>
+                    <Route path="scheduledclinic" ></Route>
+
               </Route>
 
               <Route path="part3"></Route>

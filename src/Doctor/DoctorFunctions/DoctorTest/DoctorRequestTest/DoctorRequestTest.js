@@ -120,7 +120,7 @@ function DoctorRequestTest() {
         }
 
         try {
-            const response = await fetch(`http://127.0.0.1:3000/patients/find_by_patient_id_or_nic?key=${patientKey}`);
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/patients/find_by_patient_id_or_nic?key=${patientKey}`);
             if (!response.ok) {
                 throw new Error("Failed to find patient");
             }

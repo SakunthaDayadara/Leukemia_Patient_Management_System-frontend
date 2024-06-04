@@ -14,7 +14,6 @@ function NurseConfirmScheduledTest() {
     const [uploadSuccess, setUploadSuccess] = useState(false);
     const [reportDate, setReportDate] = useState(null);
     const [testDetails, setTestDetails] = useState({});
-    const [nurseId, setNurseId] = useState("");
     const navigate = useNavigate();
 
     const handleFileChange = (event) => {
@@ -24,7 +23,7 @@ function NurseConfirmScheduledTest() {
     const handleUpload = () => {
         if (pdfUpload == null) return;
 
-        const pdfRef = ref(storage, `TestReports/${test_id}/${testDetails.test_type}/${test_id}Report`);
+        const pdfRef = ref(storage, `TestReports/${testDetails.patient_id}/${testDetails.test_type}/${test_id}Report`);
         uploadBytes(pdfRef, pdfUpload).then((snapshot) => {
             getDownloadURL(snapshot.ref).then((url) => {
                 setUrl(url);
@@ -35,25 +34,7 @@ function NurseConfirmScheduledTest() {
     };
 
     useEffect(() => {
-        const fetchNurseId = async () => {
-            const token = localStorage.getItem('token');
-            if (!token) {
-                console.error('No authorization token found');
-                return;
-            }
 
-            try {
-                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/staffautologin`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-                const data = await response.json();
-                setNurseId(data.user_id);
-            } catch (error) {
-                console.error('Error fetching nurse ID:', error);
-            }
-        };
 
         const fetchTestDetails = async () => {
             try {
@@ -65,7 +46,7 @@ function NurseConfirmScheduledTest() {
             }
         };
 
-        fetchNurseId();
+
         fetchTestDetails();
     }, [test_id]);
 
