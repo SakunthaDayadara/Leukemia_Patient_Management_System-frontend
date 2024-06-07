@@ -32,11 +32,11 @@ export const patientmainListItems = (
             </ListItemIcon>
             <ListItemText primary="Test History" />
         </ListItemButton>
-        <ListItemButton component={Link} to="/patientdashboard/part4">
+        <ListItemButton component={Link} to="/patientdashboard/referral">
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
-            <ListItemText primary="Part 4" />
+            <ListItemText primary="Referral History" />
         </ListItemButton>
     </React.Fragment>
 );

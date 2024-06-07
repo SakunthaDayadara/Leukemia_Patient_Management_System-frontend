@@ -18,7 +18,7 @@ export const doctormainListItems = (
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
-            <ListItemText primary="Patient Management" />
+            <ListItemText primary="Admission" />
         </ListItemButton>
         <ListItemButton component={Link} to="/doctordashboard/advancediagnose">
             <ListItemIcon>

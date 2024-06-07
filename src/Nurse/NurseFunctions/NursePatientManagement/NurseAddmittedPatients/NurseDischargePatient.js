@@ -14,7 +14,47 @@ function NurseDischargePatient() {
     };
 
     const handleConfirm = async () => {
-        // Add your confirm logic here
+        if (!accommodationType) {
+            alert("Please select an accommodation type.");
+            return;
+        }
+
+        try {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/patients/discharge_patient`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    patient_id: patient_id,
+                    accommodation_type: accommodationType
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to discharge patient.');
+            }
+
+            const bedResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/beds/discharge_patient_by_patient_id`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    patient_id: patient_id
+                })
+            });
+
+            if (!bedResponse.ok) {
+                throw new Error('Failed to update bed status.');
+            }
+
+            alert('Patient discharged successfully.');
+            navigate("/nursedashboard/patientmanagement/admitted");
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+        }
     };
 
     const handleBack = () => {
@@ -27,7 +67,7 @@ function NurseDischargePatient() {
                 sx={{
                     p: 2,
                     display: 'flex',
-                    flexDirection: 'column', // Change to column direction
+                    flexDirection: 'column',
                     alignItems: 'center',
                     height: '100%',
                 }}

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { FormControl, InputLabel, Select, MenuItem, Button, TextField, Typography } from "@mui/material";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import dayjs from "dayjs";
 
 function DoctorMakeClinic() {
     const [doctorId, setDoctorId] = useState("");
@@ -89,7 +90,7 @@ function DoctorMakeClinic() {
 
         const clinicData = {
             clinic: {
-                clinic_date: clinicDate.toISOString(),
+                clinic_date: dayjs(clinicDate).format('YYYY-MM-DD'),
                 clinic_type: clinicTypeValue,
                 doctor_id: doctorId,
                 patient_id: patientDetails.patient_id
@@ -231,6 +232,7 @@ function DoctorMakeClinic() {
                         onChange={(newValue) => setClinicDate(newValue)}
                         sx={{ width: '100%', marginTop: '8px' }}
                     />
+
                 </LocalizationProvider>
 
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', marginTop: '16px' }}>

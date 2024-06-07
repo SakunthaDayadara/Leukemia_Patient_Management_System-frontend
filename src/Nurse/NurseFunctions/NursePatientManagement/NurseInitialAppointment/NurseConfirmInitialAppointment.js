@@ -150,6 +150,7 @@ function NurseConfirmInitialAppointment() {
                     id="bmt_date"
                     label="Bone Marrow Test Date"
                     value={dayjs(selectedDate)}
+                    disablePast
                     onChange={handleDateChange}
                     sx={{ width: '100%', marginTop: '8px' }} // Set custom width and margin-top
                 />

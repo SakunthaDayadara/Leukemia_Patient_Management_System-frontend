@@ -112,11 +112,15 @@ function NurseConfirmRequestedTest() {
                         label="Test Place"
                         onChange={(event) => setTestPlace(event.target.value)}
                     >
-                        <MenuItem value="Lab A">Lab A</MenuItem>
-                        <MenuItem value="Lab B">Lab B</MenuItem>
-                        <MenuItem value="Lab C">Lab C</MenuItem>
+                        <MenuItem value="Pathology Lab">Pathology Lab</MenuItem>
+                        <MenuItem value="Hematology Lab">Hematology Lab</MenuItem>
+                        <MenuItem value="Microbiology Lab">Microbiology Lab</MenuItem>
+                        <MenuItem value="Immunology Lab">Immunology Lab</MenuItem>
+                        <MenuItem value="Razavi Complex">Razavi Complex</MenuItem>
+                        <MenuItem value="Private Testing">Private Testing</MenuItem>
                     </Select>
                 </FormControl>
+
 
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', marginTop: '16px' }}>
                     <Button variant="contained" color="primary" onClick={handleConfirm}>

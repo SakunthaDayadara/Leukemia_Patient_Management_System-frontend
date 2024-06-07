@@ -41,8 +41,8 @@ function NurseTest() {
                             <Button variant="contained" component={Link} to="/nursedashboard/clinic" sx={{ mr: 2 }}>
                                 Scheduled Clinics
                             </Button>
-                            <Button variant="contained" component={Link} to="/nursedashboard/clinic/#" sx={{ mr: 2 }}>
-                                Scheduled Tests
+                            <Button variant="contained" component={Link} to="/nursedashboard/clinic/ongoingclinic" sx={{ mr: 2 }}>
+                                Ongoing Clinics
                             </Button>
 
                         </Paper>

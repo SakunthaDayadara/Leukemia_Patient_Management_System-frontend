@@ -10,25 +10,20 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {FormControl, InputLabel, Select} from "@mui/material";
-import MenuItem from "@mui/material/MenuItem";
-import {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
-
-
-
 
 const defaultTheme = createTheme();
 
 export default function PatientRegister() {
     const { setAuth } = useAuth();
 
-    const [gender, setGender] = useState("");// State to hold the selected gender
+    const [gender, setGender] = useState(""); // State to hold the selected gender
     const navigate = useNavigate();
     const handleGenderChange = (event) => {
-        setGender(event.target.value);// Update the gender state when the value changes
-
+        setGender(event.target.value); // Update the gender state when the value changes
     };
 
     const [selectedDate, setSelectedDate] = useState("2000-01-01"); // Initial selected date
@@ -36,7 +31,6 @@ export default function PatientRegister() {
     const handleDateChange = (event) => {
         setSelectedDate(event.target.value); // Update selected date when the value changes
     };
-
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -58,8 +52,30 @@ export default function PatientRegister() {
         };
 
         try {
-            console.log(patientData);
-            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/patients`, {
+            // Fetch existing patients to check for duplicates
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/patients`);
+            const existingPatients = await response.json();
+
+            // Check if username, NIC, or telephone already exist
+            const usernameTaken = existingPatients.some(patient => patient.username === patientData.patient.username);
+            const nicTaken = existingPatients.some(patient => patient.nic === patientData.patient.nic);
+            const telephoneTaken = existingPatients.some(patient => patient.telephone === patientData.patient.telephone);
+
+            if (usernameTaken || nicTaken || telephoneTaken) {
+                if (usernameTaken) {
+                    alert('Username is already taken.');
+                }
+                if (nicTaken) {
+                    alert('NIC is already taken.');
+                }
+                if (telephoneTaken) {
+                    alert('Telephone number is already taken.');
+                }
+                return;
+            }
+
+            // If all checks pass, submit the form data
+            const submitResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/patients`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -67,7 +83,7 @@ export default function PatientRegister() {
                 body: JSON.stringify(patientData)
             });
 
-            if (response.ok) {
+            if (submitResponse.ok) {
                 alert('Patient registered successfully. Please make an Appointment.');
                 // Prepare login data
                 const loginData = {
@@ -94,13 +110,12 @@ export default function PatientRegister() {
                     console.error('Failed to login:', loginResponse.statusText);
                 }
             } else {
-                console.error('Failed to submit form:', response.statusText);
+                console.error('Failed to submit form:', submitResponse.statusText);
             }
         } catch (error) {
             console.error('Error:', error);
         }
     };
-
 
     return (
         <ThemeProvider theme={defaultTheme}>
@@ -145,7 +160,7 @@ export default function PatientRegister() {
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <FormControl fullWidth>
-                                    <InputLabel >Gender</InputLabel>
+                                    <InputLabel>Gender</InputLabel>
                                     <Select
                                         labelId="demo-simple-select-label"
                                         id="gender"
@@ -223,7 +238,6 @@ export default function PatientRegister() {
                                     autoComplete="new-password"
                                 />
                             </Grid>
-
                         </Grid>
                         <Button
                             type="submit"
@@ -242,7 +256,6 @@ export default function PatientRegister() {
                         </Grid>
                     </Box>
                 </Box>
-
             </Container>
         </ThemeProvider>
     );
