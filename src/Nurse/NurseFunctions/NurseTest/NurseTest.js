@@ -42,7 +42,10 @@ function NurseTest() {
                                 Requested Tests
                             </Button>
                             <Button variant="contained" component={Link} to="/nursedashboard/test/scheduledtest" sx={{ mr: 2 }}>
-                                Scheduled Tests
+                                Finalize Tests
+                            </Button>
+                            <Button variant="contained" component={Link} to="/nursedashboard/test/rescheduledtest" sx={{ mr: 2 }}>
+                                Reschedule Tests
                             </Button>
 
                         </Paper>

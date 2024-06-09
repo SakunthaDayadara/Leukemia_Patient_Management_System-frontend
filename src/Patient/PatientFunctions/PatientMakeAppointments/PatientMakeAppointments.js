@@ -75,6 +75,7 @@ export default function PatientMakeAppointments() {
         const dayAppointments = appointments[formattedDate] || [];
 
         if (dayAppointments.length >= 10) {
+            console.log(dayAppointments.length);
             alert('Maximum appointment number is already full for this day. Please select another date.');
             return;
         }

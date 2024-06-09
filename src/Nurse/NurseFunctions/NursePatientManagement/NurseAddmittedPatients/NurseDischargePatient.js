@@ -72,6 +72,9 @@ function NurseDischargePatient() {
                     height: '100%',
                 }}
             >
+                <typography variant="h6" gutterBottom>
+                    Discharge Patient
+                </typography>
                 <FormControl fullWidth>
                     <InputLabel>Accommodation Type</InputLabel>
                     <Select

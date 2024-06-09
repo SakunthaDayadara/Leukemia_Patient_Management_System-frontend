@@ -20,6 +20,8 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs from 'dayjs';
+import EditProfileModal from './EditProfileModal';
+
 
 function PatientDashpage() {
     const [patientId, setPatientId] = useState("");
@@ -29,6 +31,27 @@ function PatientDashpage() {
     const [clinicDetails, setClinicDetails] = useState(null);
     const [openModal, setOpenModal] = useState(false);
     const [rescheduleDate, setRescheduleDate] = useState(null);
+    const [openEditModal, setOpenEditModal] = useState(false);
+    const [updatedPatientDetails, setUpdatedPatientDetails] = useState(null);
+
+
+    const handleEditProfile = () => {
+        setOpenEditModal(true);
+    };
+
+    const handleCloseEditModal = () => {
+        setOpenEditModal(false);
+    };
+
+    const handleSaveProfile = (updatedDetails) => {
+        setUpdatedPatientDetails(updatedDetails);
+        // Update patient details in the backend here
+        console.log('Updated details:', updatedDetails);
+        setOpenEditModal(false);
+        fetchPatientDetails(patientId);
+    };
+
+
 
     useEffect(() => {
         const fetchPatientId = async () => {
@@ -84,16 +107,18 @@ function PatientDashpage() {
         }
     };
 
+    const fetchPatientDetails = async (id) => {
+        try {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/patients/find_by_patient_id?patient_id=${id}`);
+            const data = await response.json();
+            setPatientDetails(data);
+        } catch (error) {
+            console.error('Error fetching patient details:', error);
+        }
+    };
+
     useEffect(() => {
-        const fetchPatientDetails = async (id) => {
-            try {
-                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/patients/find_by_patient_id?patient_id=${id}`);
-                const data = await response.json();
-                setPatientDetails(data);
-            } catch (error) {
-                console.error('Error fetching patient details:', error);
-            }
-        };
+
 
         if (patientId) {
             fetchPatientDetails(patientId);
@@ -444,9 +469,20 @@ function PatientDashpage() {
                                     <Typography variant="body1" sx={{ mr: 3 }}>
                                         Name: {patientDetails?.first_name} {patientDetails?.last_name}
                                     </Typography>
-                                    <Typography variant="body1">
+                                    <Typography variant="body1" sx={{ mr: 2 }}>
                                         NIC: {patientDetails?.nic}
                                     </Typography>
+                                    <Button variant="contained" onClick={handleEditProfile}>
+                                        Edit Profile
+                                    </Button>
+
+                                    <EditProfileModal
+                                        open={openEditModal}
+                                        onClose={handleCloseEditModal}
+                                        patientDetails={patientDetails}
+                                        onSave={handleSaveProfile}
+                                        patientId={patientId}
+                                    />
                                 </Box>
                             </Paper>
                             <Paper

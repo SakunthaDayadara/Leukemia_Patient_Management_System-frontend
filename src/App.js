@@ -112,6 +112,9 @@ import DoctorRefarralHistory
 import DoctorClinicHistory from "./Doctor/DoctorDashboard/DoctorPatientHistory/DoctorClinicHistory/DoctorClinicHistory";
 import NurseDashPage from "./Nurse/NurseDashboard/NurseDashPage/NurseDashPage";
 import NursePatientHistory from "./Nurse/NurseDashboard/NursePatientHistory/NursePatientHistory";
+import NurseRescheduleTestTable from "./Nurse/NurseFunctions/NurseTest/NurseRescheduleTest/NurseRescheduleTestTable";
+import DoctorFinishTreatmentTable
+  from "./Doctor/DoctorFunctions/DoctorAdvanceDiagnose/DoctorFinishTreatment/DoctorFinishTreatmentTable";
 
 function App() {
   return (
@@ -155,6 +158,7 @@ function App() {
                 <Route path="changetreatment/:patient_id" element={<DoctorConfirmChangeTreatment />}></Route>
                 <Route path="pausetreatment" element={<DoctorPauseTreatmentTable />}></Route>
                 <Route path="resumetreatment" element={<DoctorResumeTreatmentTable />}></Route>
+                <Route path="finishtreatment" element={<DoctorFinishTreatmentTable />}></Route>
               </Route>
               <Route path="referral" element={<DoctorReference />}>
                 <Route path="" element={<DoctorMakeReferenceTable />}></Route>
@@ -228,6 +232,7 @@ function App() {
                 <Route path="requestedtest/:test_id" element={<NurseConfirmRequestedTest />}></Route>
                 <Route path="scheduledtest" element={<NurseScheduledTestTable />}></Route>
                 <Route path="scheduledtest/:test_id" element={<NurseConfirmScheduledTest />}></Route>
+                <Route path="rescheduledtest" element={<NurseRescheduleTestTable />}></Route>
               </Route>
               <Route path="clinic" element={<NurseClinic />}>
                     <Route path="" element={<NurseScheduledClinicTable />}></Route>

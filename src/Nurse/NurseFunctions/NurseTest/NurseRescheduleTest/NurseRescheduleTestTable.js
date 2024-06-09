@@ -8,16 +8,16 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
 import { useNavigate } from "react-router-dom";
 
-function DoctorScheduledClinic() {
-    const [doctorId, setDoctorId] = useState("");
-    const [clinicData, setClinicData] = useState([]);
+function NurseRescheduleTestTable() {
+    const [nurseId, setNurseId] = useState("");
+    const [testData, setTestData] = useState([]);
     const [modalOpen, setModalOpen] = useState(false);
-    const [selectedClinic, setSelectedClinic] = useState(null);
-    const [newClinicDate, setNewClinicDate] = useState(null);
+    const [selectedTest, setSelectedTest] = useState(null);
+    const [newTestDate, setNewTestDate] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchDoctorId = async () => {
+        const fetchNurseId = async () => {
             const token = localStorage.getItem('token');
             if (!token) {
                 console.error('No authorization token found');
@@ -31,102 +31,99 @@ function DoctorScheduledClinic() {
                     }
                 });
                 const data = await response.json();
-                setDoctorId(data.user_id);
+                setNurseId(data.user_id);
+                fetchRequestedTests(data.user_id);
             } catch (error) {
-                console.error('Error fetching doctor ID:', error);
+                console.error('Error fetching nurse ID:', error);
             }
         };
 
-        fetchDoctorId();
+        const fetchRequestedTests = async (nurseId) => {
+            try {
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/tests/scheduled_tests`, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                });
+                const data = await response.json();
+                setTestData(data);
+            } catch (error) {
+                console.error('Error fetching requested tests:', error);
+            }
+        };
+
+        fetchNurseId();
     }, []);
 
-    useEffect(() => {
-        if (doctorId) {
-            const fetchClinics = async () => {
-                try {
-                    const response = await fetch(`http://127.0.0.1:3000/clinics/doctor_schedule_clinic_table?doctor_id=${doctorId}`);
-                    if (!response.ok) {
-                        throw new Error('Failed to fetch clinic schedule');
-                    }
-                    const data = await response.json();
-                    setClinicData(data);
-                } catch (error) {
-                    console.error('Error fetching clinic schedule:', error);
-                }
-            };
-
-            fetchClinics();
-        }
-    }, [doctorId]);
-
     const handleDelete = async (rowData) => {
-        const confirmDelete = window.confirm("Are you sure you want to delete this Clinic Schedule?");
+        const confirmDelete = window.confirm("Are you sure you want to delete this Test?");
         if (!confirmDelete) return;
 
         try {
-            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/clinics/${rowData.clinic_id}`, {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/tests/${rowData.test_id}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
             });
             if (response.ok) {
-                alert("Clinic deleted successfully.");
-                setClinicData(prevData => prevData.filter(clinic => clinic.clinic_id !== rowData.clinic_id));
+                setTestData((prevData) => prevData.filter((test) => test.test_id !== rowData.test_id));
+                alert("Appointment deleted successfully.");
+                console.log('Appointment deleted:', rowData);
             } else {
                 console.error('Failed to delete appointment:', response.statusText);
-                alert("Failed to delete clinic.");
+                alert("Failed to delete appointment.");
             }
         } catch (error) {
             console.error('Error deleting appointment:', error);
-            alert("Error deleting clinic.");
+            alert("Error deleting appointment.");
         }
     };
 
     const handleEdit = (rowData) => {
-        setSelectedClinic(rowData);
-        setNewClinicDate(dayjs(rowData.clinic_date));
+        setSelectedTest(rowData);
+        setNewTestDate(dayjs(rowData.test_date));
         setModalOpen(true);
     };
 
     const handleCloseModal = () => {
         setModalOpen(false);
-        setSelectedClinic(null);
-        setNewClinicDate(null);
+        setSelectedTest(null);
+        setNewTestDate(null);
     };
 
     const handleConfirm = async () => {
-        if (!newClinicDate) {
-            alert("Please select a new clinic date.");
+        if (!newTestDate) {
+            alert("Please select a new test date.");
             return;
         }
 
         try {
-            const response = await fetch(`http://127.0.0.1:3000/clinics/doctor_reschedule_clinic`, {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/tests/nurse_reschedule_test`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 },
                 body: JSON.stringify({
-                    clinic_id: selectedClinic.clinic_id,
-                    clinic_date: newClinicDate.format('YYYY-MM-DD')
+                    test_id: selectedTest.test_id,
+                    test_date: newTestDate.format('YYYY-MM-DD')
                 })
             });
 
             if (response.ok) {
-                alert("Clinic rescheduled successfully.");
-                setClinicData(prevData => prevData.map(clinic =>
-                    clinic.clinic_id === selectedClinic.clinic_id ? { ...clinic, clinic_date: newClinicDate.format('YYYY-MM-DD') } : clinic
+                alert("Test rescheduled successfully.");
+                setTestData(prevData => prevData.map(test =>
+                    test.test_id === selectedTest.test_id ? { ...test, test_date: newTestDate.format('YYYY-MM-DD') } : test
                 ));
                 handleCloseModal();
             } else {
-                console.error('Failed to reschedule clinic:', response.statusText);
-                alert("Failed to reschedule clinic.");
+                console.error('Failed to reschedule test:', response.statusText);
+                alert("Failed to reschedule test.");
             }
         } catch (error) {
-            console.error('Error rescheduling clinic:', error);
-            alert("Error rescheduling clinic.");
+            console.error('Error rescheduling test:', error);
+            alert("Error rescheduling test.");
         }
     };
 
@@ -144,12 +141,13 @@ function DoctorScheduledClinic() {
                 <MaterialTable
                     columns={[
                         { title: 'Patient ID', field: 'patient_id' },
-                        { title: 'Clinic Date', field: 'clinic_date' },
-                        { title: 'Clinic Type', field: 'clinic_type' },
-                        { title: 'Last Clinic Date', field: 'last_clinic_date' },
+                        { title: 'Test Type', field: 'test_type' },
+                        { title: 'Test Date', field: 'test_date' },
+                        { title: 'Test Notes', field: 'test_notes' },
+                        { title: 'Doctor ID', field: 'doctor_id' }
                     ]}
-                    data={clinicData}
-                    title="Scheduled Clinics"
+                    data={testData}
+                    title="Tests to Reschedule"
                     style={{ width: '100%' }}
                     options={{
                         pageSize: 5,
@@ -158,16 +156,17 @@ function DoctorScheduledClinic() {
                     actions={[
                         {
                             icon: 'edit',
-                            tooltip: 'Edit Clinic',
+                            tooltip: 'Edit Appointment',
                             onClick: (event, rowData) => {
                                 handleEdit(rowData);
                             }
                         },
                         {
                             icon: 'delete',
-                            tooltip: 'Delete Clinic Schedule',
+                            tooltip: 'Delete Appointment',
                             onClick: (event, rowData) => {
                                 handleDelete(rowData);
+                                console.log('Delete appointment:', rowData);
                             }
                         }
                     ]}
@@ -192,24 +191,24 @@ function DoctorScheduledClinic() {
                     p: 4,
                 }}>
                     <Typography id="modal-title" variant="h6" component="h2">
-                        Reschedule Clinic
+                        Reschedule Test
                     </Typography>
                     <Typography sx={{ mt: 2 }}>
-                        Clinic ID: {selectedClinic?.clinic_id}
+                        Test ID: {selectedTest?.test_id}
                     </Typography>
                     <Typography sx={{ mt: 1 }}>
-                        Patient ID: {selectedClinic?.patient_id}
+                        Patient ID: {selectedTest?.patient_id}
                     </Typography>
                     <Typography sx={{ mt: 1 }}>
-                        Clinic Type: {selectedClinic?.clinic_type}
+                        Test Type: {selectedTest?.test_type}
                     </Typography>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <StaticDatePicker
                             displayStaticWrapperAs="desktop"
                             openTo="day"
-                            value={newClinicDate}
+                            value={newTestDate}
                             disablePast
-                            onChange={(newValue) => setNewClinicDate(newValue)}
+                            onChange={(newValue) => setNewTestDate(newValue)}
                             renderInput={(params) => <TextField {...params} />}
                         />
                     </LocalizationProvider>
@@ -227,4 +226,4 @@ function DoctorScheduledClinic() {
     );
 }
 
-export default DoctorScheduledClinic;
+export default NurseRescheduleTestTable;

@@ -22,33 +22,7 @@ function NurseAdmittedTable() {
         }
     };
 
-    const handleDelete = async (rowData) => {
-        const isConfirmed = window.confirm('Are you sure you want to delete this patient?');
-        if (!isConfirmed) return;
 
-        try {
-            const token = localStorage.getItem('token');
-            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/patients/delete_by_patient_id?patient_id=${rowData.patient_id}`, {
-                method: 'DELETE',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                }
-            });
-            if (response.ok) {
-                // If successful, log the deletion and update the table
-                console.log(`Successfully deleted patient with ID: ${rowData.patient_id}`);
-                alert('Patient deleted successfully!');
-                fetchPatients()
-            } else {
-                console.error('Failed to delete patient:', response.statusText);
-                alert('Failed to delete patient');
-            }
-        } catch (error) {
-            console.error('Error deleting patient:', error);
-            alert('Error deleting patient');
-        }
-    };
 
 
     return (
@@ -90,14 +64,6 @@ function NurseAdmittedTable() {
                             onClick: (event, rowData) => {
                                 navigate(`/nursedashboard/patientmanagement/admitted/${rowData.patient_id}`);
                                 console.log('Edit patient:', rowData);
-                            }
-                        },
-                        {
-                            icon: 'delete',
-                            tooltip: 'Delete Patient',
-                            onClick: (event, rowData) => {
-                                handleDelete(rowData);
-                                console.log('Delete patient:', rowData);
                             }
                         }
                     ]}
