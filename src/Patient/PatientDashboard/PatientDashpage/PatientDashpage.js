@@ -79,7 +79,7 @@ function PatientDashpage() {
 
     const fetchAppointmentDetails = async (id) => {
         try {
-            const response = await fetch(`http://127.0.0.1:3000/appointments/last_appointment_by_patient_id?patient_id=${id}`);
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/appointments/last_appointment_by_patient_id?patient_id=${id}`);
             const data = await response.json();
             setAppointmentDetails(data);
         } catch (error) {

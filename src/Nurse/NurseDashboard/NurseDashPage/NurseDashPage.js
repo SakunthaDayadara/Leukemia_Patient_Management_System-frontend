@@ -25,7 +25,7 @@ function NurseDashPage() {
         const fetchUserData = async () => {
             const token = localStorage.getItem('token');
             try {
-                const response = await fetch('http://127.0.0.1:3000/staffautologin', {
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/staffautologin`, {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 const data = await response.json();
@@ -42,7 +42,7 @@ function NurseDashPage() {
 
         const fetchAppointments = async (nurseId) => {
             try {
-                const response = await fetch(`http://127.0.0.1:3000/appointments/nurse_unfinished_appointments`);
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/appointments/nurse_unfinished_appointments`);
                 const data = await response.json();
                 setAppointments(data);
             } catch (error) {
@@ -64,7 +64,7 @@ function NurseDashPage() {
         }
 
         try {
-            const response = await fetch(`http://127.0.0.1:3000/patients/find_by_patient_id_or_nic?key=${patientKey}`);
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/patients/find_by_patient_id_or_nic?key=${patientKey}`);
             if (!response.ok) {
                 throw new Error("Failed to find patient");
             }

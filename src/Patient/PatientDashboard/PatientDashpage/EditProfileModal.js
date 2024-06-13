@@ -31,7 +31,7 @@ const EditProfileModal = ({ open, onClose, patientDetails, onSave, patientId }) 
 
         // Fetch existing patients to check for NIC or telephone conflicts
         try {
-            const response = await fetch('http://127.0.0.1:3000/patients');
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/patients`);
             const existingPatients = await response.json();
 
             // Check for NIC or telephone conflicts
@@ -44,7 +44,7 @@ const EditProfileModal = ({ open, onClose, patientDetails, onSave, patientId }) 
             }
 
             // If no conflicts, send a PATCH request to update patient details
-            const updateResponse = await fetch('http://127.0.0.1:3000/patients/update_patient', {
+            const updateResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/patients/update_patient`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',

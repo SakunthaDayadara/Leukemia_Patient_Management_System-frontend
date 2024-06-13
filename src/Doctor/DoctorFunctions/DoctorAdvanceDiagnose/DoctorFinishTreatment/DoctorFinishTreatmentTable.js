@@ -47,7 +47,7 @@ function DoctorFinishTreatmentTable() {
         if (!confirmFinish) return;
 
         try {
-            const response1 = await fetch(`http://127.0.0.1:3000/patients/doctor_finish_treatment`, {
+            const response1 = await fetch(`${process.env.REACT_APP_BACKEND_URL}patients/doctor_finish_treatment`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ function DoctorFinishTreatmentTable() {
                 throw new Error('Failed to finish patient treatment');
             }
 
-            const response2 = await fetch(`http://127.0.0.1:3000/treatment_plans/doctor_finish_treatment`, {
+            const response2 = await fetch(`${process.env.REACT_APP_BACKEND_URL}/treatment_plans/doctor_finish_treatment`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',

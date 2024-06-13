@@ -40,7 +40,7 @@ function PatientClinicHistoryTable() {
             if (!patientId) return;
 
             try {
-                const response = await fetch(`http://127.0.0.1:3000/references/find_by_patient_id?patient_id=${patientId}`);
+                const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/references/find_by_patient_id?patient_id=${patientId}`);
                 const data = await response.json();
                 setReferences(data);
             } catch (error) {

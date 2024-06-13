@@ -102,7 +102,7 @@ function DoctorScheduledClinic() {
         }
 
         try {
-            const response = await fetch(`http://127.0.0.1:3000/clinics/doctor_reschedule_clinic`, {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/clinics/doctor_reschedule_clinic`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
