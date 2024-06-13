@@ -115,6 +115,8 @@ import NursePatientHistory from "./Nurse/NurseDashboard/NursePatientHistory/Nurs
 import NurseRescheduleTestTable from "./Nurse/NurseFunctions/NurseTest/NurseRescheduleTest/NurseRescheduleTestTable";
 import DoctorFinishTreatmentTable
   from "./Doctor/DoctorFunctions/DoctorAdvanceDiagnose/DoctorFinishTreatment/DoctorFinishTreatmentTable";
+import AdminDoctorsTable from "./Admin/AdminFunctions/AdminDoctors/AdminDoctorsTable";
+import AdminNursesTable from "./Admin/AdminFunctions/AdminNurses/AdminNursesTable";
 
 function App() {
   return (
@@ -186,6 +188,8 @@ function App() {
                   <Route path=":type/:user_id" element={<AdminUpdateAccountPassword />}></Route>
                 </Route>
               </Route>
+              <Route path="doctors" element={<AdminDoctorsTable />}></Route>
+              <Route path="nurses" element={<AdminNursesTable />}></Route>
               <Route path="part2"></Route>
               <Route path="part3"></Route>
               <Route path="part4"></Route>

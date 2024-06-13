@@ -59,7 +59,7 @@ export default function StaffLogin() {
             setAuth({ isAuthenticated: true, role: responseData.role, token: responseData.token });
             // Determine which dashboard route to navigate based on role
             if (role === 'admin') {
-                navigate("/admindashboard");
+                navigate("/admindashboard/accountmanagement");
             } else if (role === 'doctor') {
                 navigate("/doctordashboard");
             } else if (role === 'nurse') {

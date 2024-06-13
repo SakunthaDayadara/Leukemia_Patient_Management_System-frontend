@@ -5,10 +5,21 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import MaterialTable from 'material-table';
-import {Link, Outlet, useNavigate} from "react-router-dom";
+import {Link, Outlet, useLocation, useNavigate} from "react-router-dom";
 import Button from "@mui/material/Button";
 
 function NurseTest() {
+    const location = useLocation();
+
+    const getButtonStyles = (path) => {
+        return location.pathname === path ? {
+            backgroundColor: 'darkblue',
+            color: 'white',
+            '&:hover': {
+                backgroundColor: 'navy'
+            }
+        } : {};
+    };
 
 
 
@@ -38,13 +49,13 @@ function NurseTest() {
                                 height: 60,
                             }}
                         >
-                            <Button variant="contained" component={Link} to="/nursedashboard/test" sx={{ mr: 2 }}>
+                            <Button variant="contained" component={Link} to="/nursedashboard/test" sx={{ mr: 2, ...getButtonStyles("/nursedashboard/test") }}>
                                 Requested Tests
                             </Button>
-                            <Button variant="contained" component={Link} to="/nursedashboard/test/scheduledtest" sx={{ mr: 2 }}>
+                            <Button variant="contained" component={Link} to="/nursedashboard/test/scheduledtest" sx={{ mr: 2, ...getButtonStyles("/nursedashboard/test/scheduledtest") }}>
                                 Finalize Tests
                             </Button>
-                            <Button variant="contained" component={Link} to="/nursedashboard/test/rescheduledtest" sx={{ mr: 2 }}>
+                            <Button variant="contained" component={Link} to="/nursedashboard/test/rescheduledtest" sx={{ mr: 2, ...getButtonStyles("/nursedashboard/test/rescheduledtest") }}>
                                 Reschedule Tests
                             </Button>
 

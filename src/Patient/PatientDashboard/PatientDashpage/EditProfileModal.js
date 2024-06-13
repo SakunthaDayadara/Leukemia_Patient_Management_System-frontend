@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
@@ -11,6 +11,15 @@ const EditProfileModal = ({ open, onClose, patientDetails, onSave, patientId }) 
     const [address, setAddress] = useState(patientDetails?.address || '');
     const [nic, setNic] = useState(patientDetails?.nic || '');
     const [telephone, setTelephone] = useState(patientDetails?.telephone || '');
+
+
+    useEffect(() => {
+        setFirstName(patientDetails?.first_name);
+        setLastName(patientDetails?.last_name);
+        setAddress(patientDetails?.address);
+        setNic(patientDetails?.nic);
+        setTelephone(patientDetails?.telephone);
+    }, [patientDetails]);
 
     const handleSave = async () => {
         // Replace empty values with existing values from patientDetails
@@ -27,10 +36,10 @@ const EditProfileModal = ({ open, onClose, patientDetails, onSave, patientId }) 
 
             // Check for NIC or telephone conflicts
             const nicConflict = existingPatients.some(patient => patient.nic === updatedNic && patient.patient_id !== patientId);
-            const telephoneConflict = existingPatients.some(patient => patient.telephone === updatedTelephone && patient.patient_id !== patientId);
+            //const telephoneConflict = existingPatients.some(patient => patient.telephone === updatedTelephone && patient.patient_id !== patientId);
 
-            if (nicConflict || telephoneConflict) {
-                alert('NIC or telephone number already exists.');
+            if (nicConflict) {
+                alert('NIC already exists.');
                 return;
             }
 

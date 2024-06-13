@@ -5,11 +5,22 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import MaterialTable from 'material-table';
-import {Link, Outlet, useNavigate, useParams} from "react-router-dom";
+import {Link, Outlet, useLocation, useNavigate, useParams} from "react-router-dom";
 import Button from "@mui/material/Button";
 
 function DoctorPatientHistory() {
     const { patient_id } = useParams();
+    const location = useLocation();
+
+    const getButtonStyles = (path) => {
+        return location.pathname === path ? {
+            backgroundColor: 'darkblue',
+            color: 'white',
+            '&:hover': {
+                backgroundColor: 'navy'
+            }
+        } : {};
+    };
 
 
 
@@ -45,7 +56,7 @@ function DoctorPatientHistory() {
                                     variant="contained"
                                     component={Link}
                                     to={`/doctordashboard/patienthistory/${patient_id}`}
-                                    sx={{ mr: 2 }}
+                                    sx={{ mr: 2, ...getButtonStyles(`/doctordashboard/patienthistory/${patient_id}`) }}
                                 >
                                     Tests
                                 </Button>
@@ -53,7 +64,7 @@ function DoctorPatientHistory() {
                                     variant="contained"
                                     component={Link}
                                     to={`/doctordashboard/patienthistory/${patient_id}/treatmenthistory`}
-                                    sx={{ mr: 2 }}
+                                    sx={{ mr: 2, ...getButtonStyles(`/doctordashboard/patienthistory/${patient_id}/treatmenthistory`) }}
                                 >
                                     Treatment
                                 </Button>
@@ -61,7 +72,7 @@ function DoctorPatientHistory() {
                                     variant="contained"
                                     component={Link}
                                     to={`/doctordashboard/patienthistory/${patient_id}/clinichistory`}
-                                    sx={{ mr: 2 }}
+                                    sx={{ mr: 2, ...getButtonStyles(`/doctordashboard/patienthistory/${patient_id}/clinichistory`) }}
                                 >
                                     Clinics
                                 </Button>
@@ -69,7 +80,7 @@ function DoctorPatientHistory() {
                                     variant="contained"
                                     component={Link}
                                     to={`/doctordashboard/patienthistory/${patient_id}/referralhistory`}
-                                    sx={{ mr: 2 }}
+                                    sx={{ mr: 2, ...getButtonStyles(`/doctordashboard/patienthistory/${patient_id}/referralhistory`) }}
                                 >
                                     Referral
                                 </Button>

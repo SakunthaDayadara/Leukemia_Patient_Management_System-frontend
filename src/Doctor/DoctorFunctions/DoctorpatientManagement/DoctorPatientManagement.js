@@ -5,10 +5,21 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import MaterialTable from 'material-table';
-import {Link, Outlet, useNavigate} from "react-router-dom";
+import {Link, Outlet, useLocation, useNavigate} from "react-router-dom";
 import Button from "@mui/material/Button";
 
 function DoctorPatientManagement() {
+    const location = useLocation();
+
+    const getButtonStyles = (path) => {
+        return location.pathname === path ? {
+            backgroundColor: 'darkblue',
+            color: 'white',
+            '&:hover': {
+                backgroundColor: 'navy'
+            }
+        } : {};
+    };
 
 
 
@@ -38,10 +49,10 @@ function DoctorPatientManagement() {
                                 height: 60,
                             }}
                         >
-                            <Button variant="contained" component={Link} to="/doctordashboard/patientmanagement" sx={{ mr: 2 }}>
+                            <Button variant="contained" component={Link} to="/doctordashboard/patientmanagement" sx={{ mr: 2, ...getButtonStyles("/doctordashboard/patientmanagement") }}>
                                 To Diagnose
                             </Button>
-                            <Button variant="contained" component={Link} to="/doctordashboard/patientmanagement/toadmit" sx={{ mr: 2 }}>
+                            <Button variant="contained" component={Link} to="/doctordashboard/patientmanagement/toadmit" sx={{ mr: 2, ...getButtonStyles("/doctordashboard/patientmanagement/toadmit") }}>
                                 To Admit
                             </Button>
 

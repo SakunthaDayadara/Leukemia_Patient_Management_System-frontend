@@ -175,11 +175,11 @@ function DoctorMakeClinic() {
                         label="Clinic Type"
                         onChange={handleClinicTypeChange}
                     >
-                        <MenuItem value="Hematology Clinic">Hematology Clinic</MenuItem>
-                        <MenuItem value="Oncology Clinic">Oncology Clinic</MenuItem>
-                        <MenuItem value="Radiation Oncology Clinic">Radiation Oncology Clinic</MenuItem>
+                        <MenuItem value="Hematology">Hematology Clinic</MenuItem>
+                        <MenuItem value="Oncology">Oncology Clinic</MenuItem>
+                        <MenuItem value="Radiation Oncology">Radiation Oncology Clinic</MenuItem>
                         <MenuItem value="Chemotherapy">Chemotherapy</MenuItem>
-                        <MenuItem value="Palliative Care Clinic">Palliative Care Clinic</MenuItem>
+                        <MenuItem value="Palliative Care">Palliative Care Clinic</MenuItem>
                         <MenuItem value="Diagnostic Imaging">Diagnostic Imaging</MenuItem>
                         <MenuItem value="Other">Other</MenuItem>
                     </Select>

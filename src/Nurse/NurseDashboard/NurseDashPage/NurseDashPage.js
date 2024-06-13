@@ -227,6 +227,8 @@ function NurseDashPage() {
                                         border: '2px solid #000',
                                         boxShadow: 24,
                                         p: 4,
+                                        maxHeight: '80vh',
+                                        overflow: 'auto', // Enable scrolling
                                     }}>
                                         <Typography id="modal-title" variant="h6" component="h2">
                                             Appointments for {selectedDate ? dayjs(selectedDate).format('MMMM D, YYYY') : ''}

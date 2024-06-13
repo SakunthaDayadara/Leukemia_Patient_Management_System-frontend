@@ -5,10 +5,21 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import MaterialTable from 'material-table';
-import {Link, Outlet, useNavigate} from "react-router-dom";
+import {Link, Outlet, useLocation, useNavigate} from "react-router-dom";
 import Button from "@mui/material/Button";
 
 function DoctorClinic() {
+    const location = useLocation();
+
+    const getButtonStyles = (path) => {
+        return location.pathname === path ? {
+            backgroundColor: 'darkblue',
+            color: 'white',
+            '&:hover': {
+                backgroundColor: 'navy'
+            }
+        } : {};
+    };
 
 
 
@@ -38,13 +49,13 @@ function DoctorClinic() {
                                 height: 60,
                             }}
                         >
-                            <Button variant="contained" component={Link} to="/doctordashboard/clinic" sx={{ mr: 2 }}>
+                            <Button variant="contained" component={Link} to="/doctordashboard/clinic" sx={{ mr: 2, ...getButtonStyles("/doctordashboard/clinic") }}>
                                 Make Clinic
                             </Button>
-                            <Button variant="contained" component={Link} to="/doctordashboard/clinic/scheduledclinic" sx={{ mr: 2 }}>
+                            <Button variant="contained" component={Link} to="/doctordashboard/clinic/scheduledclinic" sx={{ mr: 2, ...getButtonStyles("/doctordashboard/clinic/scheduledclinic") }}>
                                 Scheduled Clinics
                             </Button>
-                            <Button variant="contained" component={Link} to="/doctordashboard/clinic/ongoingclinic" sx={{ mr: 2 }}>
+                            <Button variant="contained" component={Link} to="/doctordashboard/clinic/ongoingclinic" sx={{ mr: 2, ...getButtonStyles("/doctordashboard/clinic/ongoingclinic") }}>
                                 Ongoing Clinics
                             </Button>
 

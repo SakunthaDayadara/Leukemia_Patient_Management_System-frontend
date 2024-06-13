@@ -5,10 +5,22 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import MaterialTable from 'material-table';
-import {Link, Outlet, useNavigate} from "react-router-dom";
+import {Link, Outlet, useLocation, useNavigate} from "react-router-dom";
 import Button from "@mui/material/Button";
 
+
 function NurseTreatmentRecords() {
+    const location = useLocation();
+
+    const getButtonStyles = (path) => {
+        return location.pathname === path ? {
+            backgroundColor: 'darkblue',
+            color: 'white',
+            '&:hover': {
+                backgroundColor: 'navy'
+            }
+        } : {};
+    };
 
 
 
@@ -38,10 +50,10 @@ function NurseTreatmentRecords() {
                                 height: 60,
                             }}
                         >
-                            <Button variant="contained" component={Link} to="/nursedashboard/treatment" sx={{ mr: 2 }}>
+                            <Button variant="contained" component={Link} to="/nursedashboard/treatment" sx={{ mr: 2, ...getButtonStyles("/nursedashboard/treatment") }}>
                                 New Treatment
                             </Button>
-                            <Button variant="contained" component={Link} to="/nursedashboard/treatment/pendingtreatment" sx={{ mr: 2 }}>
+                            <Button variant="contained" component={Link} to="/nursedashboard/treatment/pendingtreatment" sx={{ mr: 2, ...getButtonStyles("/nursedashboard/treatment/pendingtreatment") }}>
                                 Pending Treatment
                             </Button>
 
