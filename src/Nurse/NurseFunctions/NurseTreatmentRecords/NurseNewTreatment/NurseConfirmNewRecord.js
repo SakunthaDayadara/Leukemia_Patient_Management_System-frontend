@@ -57,9 +57,11 @@ function NurseConfirmNewRecord() {
             return;
         }
 
+        const updatedTreatmentNote = treatmentNotes.trim() || "No Special Notes";
+
         const treatmentRecord = {
             treatment_date: dayjs(selectedDate).format('YYYY-MM-DD'),
-            treatment_notes: treatmentNotes,
+            treatment_notes: updatedTreatmentNote,
             nurse_id: nurseId,
             patient_id: patient_id,
             treatment_id: treatmentId

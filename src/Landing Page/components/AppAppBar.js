@@ -12,6 +12,8 @@ import MenuItem from '@mui/material/MenuItem';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
+import logo from './hospitallogo.png';
+
 
 const logoStyle = {
   width: '140px',
@@ -85,50 +87,42 @@ function AppAppBar({ mode, toggleColorMode }) {
             >
               <img
                 src={
-                  './hospitallogo.jpeg'
+                    `${logo}`
                 }
                 style={logoStyle}
                 alt="logo of site"
               />
-              <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+              <Box sx={{ display: { xs: 'none', md: 'flex' } }} >
                 <MenuItem
-                  onClick={() => scrollToSection('features')}
-                  sx={{ py: '6px', px: '12px' }}
+                  onClick={() => scrollToSection('aboutus')}
+                  sx={{ py: '6px', px: '12px', mr: 2 }}
                 >
                   <Typography variant="body2" color="text.primary">
-                    Part 1
+                    About us
                   </Typography>
                 </MenuItem>
                 <MenuItem
-                  onClick={() => scrollToSection('testimonials')}
-                  sx={{ py: '6px', px: '12px' }}
+                  onClick={() => scrollToSection('services')}
+                  sx={{ py: '6px', px: '12px', mr: 2  }}
                 >
                   <Typography variant="body2" color="text.primary">
-                   Part 2
-                  </Typography>
-                </MenuItem>
-                <MenuItem
-                  onClick={() => scrollToSection('highlights')}
-                  sx={{ py: '6px', px: '12px' }}
-                >
-                  <Typography variant="body2" color="text.primary">
-                      Part 3
-                  </Typography>
-                </MenuItem>
-                <MenuItem
-                  onClick={() => scrollToSection('pricing')}
-                  sx={{ py: '6px', px: '12px' }}
-                >
-                  <Typography variant="body2" color="text.primary">
-                      Part 4
+                      Services
                   </Typography>
                 </MenuItem>
                 <MenuItem
                   onClick={() => scrollToSection('faq')}
+                  sx={{ py: '6px', px: '12px', mr: 2  }}
+                >
+                  <Typography variant="body2" color="text.primary">
+                      F&Q
+                  </Typography>
+                </MenuItem>
+                <MenuItem
+                  onClick={() => scrollToSection('contactus')}
                   sx={{ py: '6px', px: '12px' }}
                 >
                   <Typography variant="body2" color="text.primary">
-                      Part 5
+                      Contact Us
                   </Typography>
                 </MenuItem>
               </Box>
@@ -198,20 +192,17 @@ function AppAppBar({ mode, toggleColorMode }) {
                   >
 
                   </Box>
-                  <MenuItem onClick={() => scrollToSection('features')}>
-                    Part 1
+                  <MenuItem onClick={() => scrollToSection('aboutus')}>
+                    About us
                   </MenuItem>
-                  <MenuItem onClick={() => scrollToSection('testimonials')}>
-                      Part 2
-                  </MenuItem>
-                  <MenuItem onClick={() => scrollToSection('highlights')}>
-                      Part 3
-                  </MenuItem>
-                  <MenuItem onClick={() => scrollToSection('pricing')}>
-                      Part 4
+                  <MenuItem onClick={() => scrollToSection('services')}>
+                      Services
                   </MenuItem>
                   <MenuItem onClick={() => scrollToSection('faq')}>
-                      Part 5
+                      F&Q
+                  </MenuItem>
+                  <MenuItem onClick={() => scrollToSection('contactus')}>
+                      Contact Us
                   </MenuItem>
                   <Divider />
                   <MenuItem>

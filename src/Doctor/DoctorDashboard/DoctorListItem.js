@@ -18,7 +18,7 @@ export const doctormainListItems = (
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
-            <ListItemText primary="Patient Management" />
+            <ListItemText primary="Admission" />
         </ListItemButton>
         <ListItemButton component={Link} to="/doctordashboard/advancediagnose">
             <ListItemIcon>
@@ -38,11 +38,11 @@ export const doctormainListItems = (
             </ListItemIcon>
             <ListItemText primary="Test" />
         </ListItemButton>
-        <ListItemButton component={Link} to="/doctordashboard/#">
+        <ListItemButton component={Link} to="/doctordashboard/clinic">
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
-            <ListItemText primary="Part 5" />
+            <ListItemText primary="Clinic" />
         </ListItemButton>
     </React.Fragment>
 );

@@ -1,15 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import {Link, Outlet, useNavigate} from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import Button from "@mui/material/Button";
 
 function NurseAppointmentManagement() {
+    const location = useLocation();
 
-
+    const getButtonStyles = (path) => {
+        return location.pathname === path ? {
+            backgroundColor: 'darkblue',
+            color: 'white',
+            '&:hover': {
+                backgroundColor: 'navy'
+            }
+        } : {};
+    };
 
     return (
         <React.Fragment>
@@ -37,16 +46,36 @@ function NurseAppointmentManagement() {
                                 height: 60,
                             }}
                         >
-                            <Button variant="contained" component={Link} to="/nursedashboard/appointmentmanagement" sx={{ mr: 2 }}>
+                            <Button
+                                variant="contained"
+                                component={Link}
+                                to="/nursedashboard/appointmentmanagement"
+                                sx={{ mr: 2, ...getButtonStyles("/nursedashboard/appointmentmanagement") }}
+                            >
                                 Confirm Appointments
                             </Button>
-                            <Button variant="contained" component={Link} to="/nursedashboard/appointmentmanagement/rescheduleappointment" sx={{ mr: 2 }}>
+                            <Button
+                                variant="contained"
+                                component={Link}
+                                to="/nursedashboard/appointmentmanagement/rescheduleappointment"
+                                sx={{ mr: 2, ...getButtonStyles("/nursedashboard/appointmentmanagement/rescheduleappointment") }}
+                            >
                                 Reschedule Appointments
                             </Button>
-                            <Button variant="contained" component={Link} to="/nursedashboard/appointmentmanagement/ongoingappointment" sx={{ mr: 2 }}>
+                            <Button
+                                variant="contained"
+                                component={Link}
+                                to="/nursedashboard/appointmentmanagement/ongoingappointment"
+                                sx={{ mr: 2, ...getButtonStyles("/nursedashboard/appointmentmanagement/ongoingappointment") }}
+                            >
                                 Ongoing Appointments
                             </Button>
-                            <Button variant="contained" component={Link} to="/nursedashboard/appointmentmanagement/finishedappointment" >
+                            <Button
+                                variant="contained"
+                                component={Link}
+                                to="/nursedashboard/appointmentmanagement/finishedappointment"
+                                sx={{ ...getButtonStyles("/nursedashboard/appointmentmanagement/finishedappointment") }}
+                            >
                                 Finished Appointments
                             </Button>
                         </Paper>

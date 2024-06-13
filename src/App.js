@@ -5,7 +5,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import LandingPage from "./Landing Page/LandingPage";
 import PatientLogin from "./Login/PatientLogin/PatientLogin";
 import PatientDashboard from "./Patient/PatientDashboard/PatientDashboard";
-import PatientDashpage from "./Patient/PatientDashboard/PatientDashpage";
+import PatientDashpage from "./Patient/PatientDashboard/PatientDashpage/PatientDashpage";
 import StaffLogin from "./Login/StaffLogin/StaffLogin";
 import DoctorDashboard from "./Doctor/DoctorDashboard/DoctorDashboard";
 import AdminDashboard from "./Admin/AdminDashboard/AdminDashboard";
@@ -86,6 +86,37 @@ import NurseConfirmRequestedTest from "./Nurse/NurseFunctions/NurseTest/NurseReq
 import NurseScheduledTestTable from "./Nurse/NurseFunctions/NurseTest/NurseScheduledTest/NurseScheduledTestTable";
 import DoctorPendingTestTable from "./Doctor/DoctorFunctions/DoctorTest/DoctorPendingTest/DoctorPendingTestTable";
 import NurseConfirmScheduledTest from "./Nurse/NurseFunctions/NurseTest/NurseScheduledTest/NurseConfirmScheduledTest";
+import DoctorClinic from "./Doctor/DoctorFunctions/DoctorClinic/DoctorClinic";
+import DoctorMakeClinic from "./Doctor/DoctorFunctions/DoctorClinic/DoctorMakeClinic/DoctorMakeClinic";
+import DoctorScheduledClinic from "./Doctor/DoctorFunctions/DoctorClinic/DoctorScheduledClinic/DoctorScheduledClinic";
+import NurseClinic from "./Nurse/NurseFunctions/NurseClinic/NurseClinic";
+import NurseScheduledClinicTable
+  from "./Nurse/NurseFunctions/NurseClinic/NurseScheduledClinic/NurseScheduledClinicTable";
+import DoctorOngoingClinicTable
+  from "./Doctor/DoctorFunctions/DoctorClinic/DoctorOngoingClinic/DoctorOngoingClinicTable";
+import PatientClinicHistoryTable from "./Patient/PatientFunctions/PatientClinicHistory/PatientClinicHistoryTable";
+import PatientTestHistoryTable
+  from "./Patient/PatientFunctions/PatientTestHistory/PatientTestHistoryTable";
+import PatientTreatmentHistoryTable from "./Patient/PatientFunctions/PatientTreatmentHistory/PatientTreatmentHistoryTable";
+import NurseConfirmRescheduleAppointment
+  from "./Nurse/NurseFunctions/NurseAppointmentManagement/NurseRescheduleAppointment/NurseConfirmRescheduleAppointment";
+import NurseOngoingClinicTable from "./Nurse/NurseFunctions/NurseClinic/NurseOngoingClinic/NurseOngoingClinicTable";
+import PatientReferralHistoryTable from "./Patient/PatientFunctions/PatientReferralHistory/PatientReferralHistoryTable";
+import DoctorDashPage from "./Doctor/DoctorDashboard/DoctorDashPage/DoctorDashPage";
+import DoctorPatientHistory from "./Doctor/DoctorDashboard/DoctorPatientHistory/DoctorPatientHistory";
+import DoctorTestHistory from "./Doctor/DoctorDashboard/DoctorPatientHistory/DoctorTestHistory/DoctorTestHistory";
+import DoctorTreatmentHistory
+  from "./Doctor/DoctorDashboard/DoctorPatientHistory/DoctorTreatmentHistory/DoctorTreatmentHistory";
+import DoctorRefarralHistory
+  from "./Doctor/DoctorDashboard/DoctorPatientHistory/DoctorRefarralHistory/DoctorRefarralHistory";
+import DoctorClinicHistory from "./Doctor/DoctorDashboard/DoctorPatientHistory/DoctorClinicHistory/DoctorClinicHistory";
+import NurseDashPage from "./Nurse/NurseDashboard/NurseDashPage/NurseDashPage";
+import NursePatientHistory from "./Nurse/NurseDashboard/NursePatientHistory/NursePatientHistory";
+import NurseRescheduleTestTable from "./Nurse/NurseFunctions/NurseTest/NurseRescheduleTest/NurseRescheduleTestTable";
+import DoctorFinishTreatmentTable
+  from "./Doctor/DoctorFunctions/DoctorAdvanceDiagnose/DoctorFinishTreatment/DoctorFinishTreatmentTable";
+import AdminDoctorsTable from "./Admin/AdminFunctions/AdminDoctors/AdminDoctorsTable";
+import AdminNursesTable from "./Admin/AdminFunctions/AdminNurses/AdminNursesTable";
 
 function App() {
   return (
@@ -100,15 +131,21 @@ function App() {
             <Route path='/patientappointment/:patient_id' element={<PatientMakeAppointments />}></Route>
             <Route path='/patientdashboard' element={<PatientDashboard />}>
               <Route path="" element={<PatientDashpage />} ></Route>
-              <Route path="part1"></Route>
-              <Route path="part2"></Route>
-              <Route path="part3"></Route>
-              <Route path="part4"></Route>
+              <Route path="clinichistory" element={<PatientClinicHistoryTable />}></Route>
+              <Route path="treatmenthistory" element={<PatientTreatmentHistoryTable />}></Route>
+              <Route path="testhistory" element={<PatientTestHistoryTable />}></Route>
+              <Route path="referral" element={<PatientReferralHistoryTable />}></Route>
             </Route>
           </Route>
           <Route element={<RequireAuth allowedRole={"doctor"} />}>
             <Route path='/doctordashboard' element={<DoctorDashboard />}>
-              <Route path="" element={<PatientDashpage />} ></Route>
+              <Route path="" element={<DoctorDashPage />} ></Route>
+              <Route path="patienthistory/:patient_id" element={<DoctorPatientHistory />}>
+                <Route path="" element={<DoctorTestHistory />} ></Route>
+                <Route path="treatmenthistory" element={<DoctorTreatmentHistory />}></Route>
+                <Route path="clinichistory" element={<DoctorClinicHistory />}></Route>
+                <Route path="referralhistory" element={<DoctorRefarralHistory />}></Route>
+              </Route>
               <Route path="patientmanagement" element={<DoctorPatientManagement />}>
                 <Route path="" element={<DoctorToDiagnoseTable />}></Route>
                 <Route path="todiagnose/:patient_id" element={<DoctorConfirmToDiagnose />}></Route>
@@ -123,6 +160,7 @@ function App() {
                 <Route path="changetreatment/:patient_id" element={<DoctorConfirmChangeTreatment />}></Route>
                 <Route path="pausetreatment" element={<DoctorPauseTreatmentTable />}></Route>
                 <Route path="resumetreatment" element={<DoctorResumeTreatmentTable />}></Route>
+                <Route path="finishtreatment" element={<DoctorFinishTreatmentTable />}></Route>
               </Route>
               <Route path="referral" element={<DoctorReference />}>
                 <Route path="" element={<DoctorMakeReferenceTable />}></Route>
@@ -133,7 +171,11 @@ function App() {
                 <Route path="" element={<DoctorRequestTest />} ></Route>
                 <Route path="pendingtest" element={<DoctorPendingTestTable />} ></Route>
               </Route>
-              <Route path="part3"></Route>
+              <Route path="clinic" element={<DoctorClinic />}>
+                <Route path="" element={<DoctorMakeClinic />}></Route>
+                <Route path="scheduledclinic" element={<DoctorScheduledClinic />}></Route>
+                <Route path="ongoingclinic" element={<DoctorOngoingClinicTable />}></Route>
+              </Route>
               <Route path="part4"></Route>
             </Route>
           </Route>
@@ -146,6 +188,8 @@ function App() {
                   <Route path=":type/:user_id" element={<AdminUpdateAccountPassword />}></Route>
                 </Route>
               </Route>
+              <Route path="doctors" element={<AdminDoctorsTable />}></Route>
+              <Route path="nurses" element={<AdminNursesTable />}></Route>
               <Route path="part2"></Route>
               <Route path="part3"></Route>
               <Route path="part4"></Route>
@@ -153,12 +197,18 @@ function App() {
           </Route>
           <Route element={<RequireAuth allowedRole={"nurse"} />}>
             <Route path='/nursedashboard' element={<NurseDashboard />}>
-              <Route path="" element={<PatientDashpage />} ></Route>
+              <Route path="" element={<NurseDashPage />} ></Route>
+              <Route path="patienthistory/:patient_id" element={<NursePatientHistory />}>
+                <Route path="" element={<DoctorTestHistory />} ></Route>
+                <Route path="treatmenthistory" element={<DoctorTreatmentHistory />}></Route>
+                <Route path="clinichistory" element={<DoctorClinicHistory />}></Route>
+                <Route path="referralhistory" element={<DoctorRefarralHistory />}></Route>
+              </Route>
               <Route path="appointmentmanagement" element={<NurseAppointmentManagement />}>
                 <Route path="" element={<NurseConfirmAppointmentTable />}></Route>
                 <Route path="confirmappointment/:appointment_id" element={<NurseConfirmAppointment />}></Route>
                 <Route path="rescheduleappointment" element={<NurseRescheduleAppointmentTable />}></Route>
-                <Route path="rescheduleappointment/:appointment_id"></Route>
+                <Route path="rescheduleappointment/:appointment_id" element={<NurseConfirmRescheduleAppointment />}></Route>
                 <Route path="ongoingappointment" element={<NurseOngoingAppointmentTable />}></Route>
                 <Route path="finishedappointment" element={<NurseFinishedAppointment />}></Route>
 
@@ -186,6 +236,12 @@ function App() {
                 <Route path="requestedtest/:test_id" element={<NurseConfirmRequestedTest />}></Route>
                 <Route path="scheduledtest" element={<NurseScheduledTestTable />}></Route>
                 <Route path="scheduledtest/:test_id" element={<NurseConfirmScheduledTest />}></Route>
+                <Route path="rescheduledtest" element={<NurseRescheduleTestTable />}></Route>
+              </Route>
+              <Route path="clinic" element={<NurseClinic />}>
+                    <Route path="" element={<NurseScheduledClinicTable />}></Route>
+                    <Route path="ongoingclinic" element={<NurseOngoingClinicTable />}></Route>
+
               </Route>
 
               <Route path="part3"></Route>

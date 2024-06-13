@@ -1,125 +1,80 @@
-import * as React from 'react';
-import { alpha } from '@mui/material';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import Link from '@mui/material/Link';
-import Stack from '@mui/material/Stack';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
+import React from 'react';
+import { Container, Grid, Typography, Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import logo from "./hospitallogo.png";
 
-export default function Hero() {
-  return (
-    <Box
-      id="hero"
-      sx={(theme) => ({
-        width: '100%',
-        backgroundImage:
-          theme.palette.mode === 'light'
-            ? 'linear-gradient(180deg, #CEE5FD, #FFF)'
-            : `linear-gradient(#02294F, ${alpha('#090E10', 0.0)})`,
-        backgroundSize: '100% 20%',
-        backgroundRepeat: 'no-repeat',
-      })}
-    >
-      <Container
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          pt: { xs: 14, sm: 20 },
-          pb: { xs: 8, sm: 12 },
-        }}
-      >
-        <Stack spacing={2} useFlexGap sx={{ width: { xs: '100%', sm: '70%' } }}>
-          <Typography
-            variant="h1"
-            sx={{
-              display: 'flex',
-              flexDirection: { xs: 'column', md: 'row' },
-              alignSelf: 'center',
-              textAlign: 'center',
-              fontSize: 'clamp(3.5rem, 10vw, 4rem)',
-            }}
-          >
-            Our latest&nbsp;
-            <Typography
-              component="span"
-              variant="h1"
-              sx={{
-                fontSize: 'clamp(3rem, 10vw, 4rem)',
-                color: (theme) =>
-                  theme.palette.mode === 'light' ? 'primary.main' : 'primary.light',
-              }}
-            >
-              products
-            </Typography>
-          </Typography>
-          <Typography
-            textAlign="center"
-            color="text.secondary"
-            sx={{ alignSelf: 'center', width: { sm: '100%', md: '80%' } }}
-          >
-            Explore our cutting-edge dashboard, delivering high-quality solutions
-            tailored to your needs. Elevate your experience with top-tier features
-            and services.
-          </Typography>
-          <Stack
-            direction={{ xs: 'column', sm: 'row' }}
-            alignSelf="center"
-            spacing={1}
-            useFlexGap
-            sx={{ pt: 2, width: { xs: '100%', sm: 'auto' } }}
-          >
-            <TextField
-              id="outlined-basic"
-              hiddenLabel
-              size="small"
-              variant="outlined"
-              aria-label="Enter your email address"
-              placeholder="Your email address"
-              inputProps={{
-                autoComplete: 'off',
-                'aria-label': 'Enter your email address',
-              }}
-            />
-            <Button variant="contained" color="primary">
-              Start now
-            </Button>
-          </Stack>
-          <Typography variant="caption" textAlign="center" sx={{ opacity: 0.8 }}>
-            By clicking &quot;Start now&quot; you agree to our&nbsp;
-            <Link href="#" color="primary">
-              Terms & Conditions
-            </Link>
-            .
-          </Typography>
-        </Stack>
-        <Box
-          id="image"
-          sx={(theme) => ({
-            mt: { xs: 8, sm: 10 },
-            alignSelf: 'center',
-            height: { xs: 200, sm: 700 },
-            width: '100%',
-            backgroundImage:
-              theme.palette.mode === 'light'
-                ? 'url("/static/images/templates/templates-images/hero-light.png")'
-                : 'url("/static/images/templates/templates-images/hero-dark.png")',
-            backgroundSize: 'cover',
-            borderRadius: '10px',
-            outline: '1px solid',
-            outlineColor:
-              theme.palette.mode === 'light'
-                ? alpha('#BFCCD9', 0.5)
-                : alpha('#9CCCFC', 0.1),
-            boxShadow:
-              theme.palette.mode === 'light'
-                ? `0 0 12px 8px ${alpha('#9CCCFC', 0.2)}`
-                : `0 0 24px 12px ${alpha('#033363', 0.2)}`,
-          })}
-        />
-      </Container>
-    </Box>
-  );
+const useStyles = makeStyles((theme) => ({
+    heroContent: {
+        backgroundColor: theme.palette.background.paper,
+        padding: theme.spacing(8, 0, 6),
+        paddingTop: theme.spacing(16),
+    },
+    heroButtons: {
+        marginTop: theme.spacing(4),
+    },
+    heroImage: {
+        marginTop: theme.spacing(4),
+        marginBottom: theme.spacing(4), // Adjust this value to increase/decrease the gap
+    },
+}));
+
+function Hero() {
+    const classes = useStyles();
+
+    const scrollToSection = (sectionId) => {
+        const sectionElement = document.getElementById(sectionId);
+        const offset = 128;
+        if (sectionElement) {
+            const targetScroll = sectionElement.offsetTop - offset;
+            sectionElement.scrollIntoView({ behavior: 'smooth' });
+            window.scrollTo({
+                top: targetScroll,
+                behavior: 'smooth',
+            });
+
+        }
+    };
+
+    return (
+        <div className={classes.heroContent}>
+            <Container maxWidth="sm">
+                <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+                    Leukemia Treatment and Care
+                </Typography>
+                <img
+                    src={logo}
+                    alt="logo of site"
+                    className={classes.heroImage}
+                />
+                <Typography variant="h5" align="center" color="textSecondary" paragraph>
+                    At Apeksha Hospital, we are dedicated to providing comprehensive care and advanced treatment options
+                    for leukemia patients. Our specialized team is here to support you every step of the way.
+                </Typography>
+                <div className={classes.heroButtons}>
+                    <Grid container spacing={2} justifyContent="center">
+                        <Grid item>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={() => scrollToSection('services')}
+                            >
+                                Learn More
+                            </Button>
+                        </Grid>
+                        <Grid item>
+                            <Button
+                                variant="outlined"
+                                color="primary"
+                                onClick={() => scrollToSection('contactus')}
+                            >
+                                Contact Us
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </div>
+            </Container>
+        </div>
+    );
 }
+
+export default Hero;

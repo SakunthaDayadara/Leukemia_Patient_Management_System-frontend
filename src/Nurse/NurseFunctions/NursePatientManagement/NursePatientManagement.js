@@ -5,10 +5,21 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import MaterialTable from 'material-table';
-import {Link, Outlet, useNavigate} from "react-router-dom";
+import {Link, Outlet, useLocation, useNavigate} from "react-router-dom";
 import Button from "@mui/material/Button";
 
 function NursePatientManagement() {
+    const location = useLocation();
+
+    const getButtonStyles = (path) => {
+        return location.pathname === path ? {
+            backgroundColor: 'darkblue',
+            color: 'white',
+            '&:hover': {
+                backgroundColor: 'navy'
+            }
+        } : {};
+    };
 
 
 
@@ -38,19 +49,19 @@ function NursePatientManagement() {
                                 height: 60,
                             }}
                         >
-                            <Button variant="contained" component={Link} to="/nursedashboard/patientmanagement" sx={{ mr: 2 }}>
+                            <Button variant="contained" component={Link} to="/nursedashboard/patientmanagement" sx={{ mr: 2, ...getButtonStyles("/nursedashboard/patientmanagement") }}>
                                 Initial Appointments
                             </Button>
-                            <Button variant="contained" component={Link} to="/nursedashboard/patientmanagement/testdone" sx={{ mr: 2 }}>
+                            <Button variant="contained" component={Link} to="/nursedashboard/patientmanagement/testdone" sx={{ mr: 2, ...getButtonStyles("/nursedashboard/patientmanagement/testdone") }}>
                                 Test Done
                             </Button>
-                            <Button variant="contained" component={Link} to="/nursedashboard/patientmanagement/todiagnose" sx={{ mr: 2 }}>
+                            <Button variant="contained" component={Link} to="/nursedashboard/patientmanagement/todiagnose" sx={{ mr: 2, ...getButtonStyles("/nursedashboard/patientmanagement/todiagnose") }}>
                                 To Diagnose
                             </Button>
-                            <Button variant="contained" component={Link} to="/nursedashboard/patientmanagement/toadmit" sx={{ mr: 2 }}>
+                            <Button variant="contained" component={Link} to="/nursedashboard/patientmanagement/toadmit" sx={{ mr: 2, ...getButtonStyles("/nursedashboard/patientmanagement/toadmit") }}>
                                 To Admit
                             </Button>
-                            <Button variant="contained" component={Link} to="/nursedashboard/patientmanagement/admitted" sx={{ mr: 2 }}>
+                            <Button variant="contained" component={Link} to="/nursedashboard/patientmanagement/admitted" sx={{ mr: 2, ...getButtonStyles("/nursedashboard/patientmanagement/admitted") }}>
                                 Admitted
                             </Button>
                         </Paper>

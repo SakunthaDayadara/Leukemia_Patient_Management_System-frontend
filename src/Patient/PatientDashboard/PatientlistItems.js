@@ -14,29 +14,29 @@ export const patientmainListItems = (
             </ListItemIcon>
             <ListItemText primary="Dashboard" />
         </ListItemButton>
-        <ListItemButton component={Link} to="/patientdashboard/part1">
+        <ListItemButton component={Link} to="/patientdashboard/clinichistory">
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
-            <ListItemText primary="Part 1" />
+            <ListItemText primary="Clinic History" />
         </ListItemButton>
-        <ListItemButton component={Link} to="/patientdashboard/part2">
+        <ListItemButton component={Link} to="/patientdashboard/treatmenthistory">
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
-            <ListItemText primary="Part 2" />
+            <ListItemText primary="Treatment History" />
         </ListItemButton>
-        <ListItemButton component={Link} to="/patientdashboard/part3">
+        <ListItemButton component={Link} to="/patientdashboard/testhistory">
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
-            <ListItemText primary="Part 3" />
+            <ListItemText primary="Test History" />
         </ListItemButton>
-        <ListItemButton component={Link} to="/patientdashboard/part4">
+        <ListItemButton component={Link} to="/patientdashboard/referral">
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
-            <ListItemText primary="Part 4" />
+            <ListItemText primary="Referral History" />
         </ListItemButton>
     </React.Fragment>
 );

@@ -18,7 +18,8 @@ function DoctorConfirmToDiagnose() {
         fetch(`${process.env.REACT_APP_BACKEND_URL}/appointments/find_by_patient_id?patient_id=${patient_id}`)
             .then(response => response.json())
             .then(data => {
-                setAppointmentData(data[0]);
+                setAppointmentData(data);
+                console.log('Fetched appointment data:', data);
             })
             .catch(error => {
                 console.error('Error fetching appointment data:', error);
@@ -72,6 +73,7 @@ function DoctorConfirmToDiagnose() {
                     flexDirection: 'column', // Change to column direction
                     alignItems: 'center',
                     height: '100%',
+                    width: '100%',
                 }}
             >
 

@@ -87,6 +87,7 @@ function NurseScheduledTestTable() {
                     columns={[
                         { title: 'Patient ID', field: 'patient_id' },
                         { title: 'Test Type', field: 'test_type' },
+                        { title: 'Test Date', field: 'test_date' },
                         { title: 'Test Notes', field: 'test_notes' },
                         { title: 'Doctor ID', field: 'doctor_id' }
                     ]}

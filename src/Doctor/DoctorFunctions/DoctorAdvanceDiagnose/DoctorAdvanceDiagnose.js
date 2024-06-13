@@ -5,10 +5,21 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import MaterialTable from 'material-table';
-import {Link, Outlet, useNavigate} from "react-router-dom";
+import {Link, Outlet, useLocation, useNavigate} from "react-router-dom";
 import Button from "@mui/material/Button";
 
 function DoctorAdvanceDiagnose() {
+    const location = useLocation();
+
+    const getButtonStyles = (path) => {
+        return location.pathname === path ? {
+            backgroundColor: 'darkblue',
+            color: 'white',
+            '&:hover': {
+                backgroundColor: 'navy'
+            }
+        } : {};
+    };
 
 
 
@@ -38,20 +49,23 @@ function DoctorAdvanceDiagnose() {
                                 height: 60,
                             }}
                         >
-                            <Button variant="contained" component={Link} to="/doctordashboard/advancediagnose" sx={{ mr: 2 }}>
-                                To Categorize
+                            <Button variant="contained" component={Link} to="/doctordashboard/advancediagnose" sx={{ mr: 2, ...getButtonStyles("/doctordashboard/advancediagnose") }}>
+                                Categorize
                             </Button>
-                            <Button variant="contained" component={Link} to="/doctordashboard/advancediagnose/changecategory" sx={{ mr: 2 }}>
+                            <Button variant="contained" component={Link} to="/doctordashboard/advancediagnose/changecategory" sx={{ mr: 2, ...getButtonStyles("/doctordashboard/advancediagnose/changecategory") }}>
                                 Change Category
                             </Button>
-                            <Button variant="contained" component={Link} to="/doctordashboard/advancediagnose/changetreatment" sx={{ mr: 2 }}>
+                            <Button variant="contained" component={Link} to="/doctordashboard/advancediagnose/changetreatment" sx={{ mr: 2, ...getButtonStyles("/doctordashboard/advancediagnose/changetreatment") }}>
                                 Change Treatment
                             </Button>
-                            <Button variant="contained" component={Link} to="/doctordashboard/advancediagnose/pausetreatment" sx={{ mr: 2 }}>
+                            <Button variant="contained" component={Link} to="/doctordashboard/advancediagnose/pausetreatment" sx={{ mr: 2, ...getButtonStyles("/doctordashboard/advancediagnose/pausetreatment") }}>
                                 Pause Treatment
                             </Button>
-                            <Button variant="contained" component={Link} to="/doctordashboard/advancediagnose/resumetreatment" sx={{ mr: 2 }}>
+                            <Button variant="contained" component={Link} to="/doctordashboard/advancediagnose/resumetreatment" sx={{ mr: 2, ...getButtonStyles("/doctordashboard/advancediagnose/resumetreatment") }}>
                                 Resume Treatment
+                            </Button>
+                            <Button variant="contained" component={Link} to="/doctordashboard/advancediagnose/finishtreatment" sx={{ mr: 2, ...getButtonStyles("/doctordashboard/advancediagnose/finishtreatment") }}>
+                                Finish Treatment
                             </Button>
 
                         </Paper>

@@ -142,15 +142,28 @@ export default function NurseDashboard() {
                         >
                             <MenuIcon />
                         </IconButton>
-                        <Typography
-                            component="h1"
-                            variant="h6"
-                            color="inherit"
-                            noWrap
-                            sx={{ flexGrow: 1 }}
-                        >
-                            {userData && userData.name && `Welcome, ${userData.name}`}
-                        </Typography>
+                        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                            <Typography
+                                component="h1"
+                                variant="h6"
+                                color="inherit"
+                                noWrap
+                                sx={{ flexGrow: 0, textAlign: 'left' }} // Aligns to the left
+                            >
+                                {userData && userData.nurse_id && `Nurse ID: ${userData.nurse_id}`}
+                            </Typography>
+                            <Box sx={{ flexGrow: 1 }} /> {/* Spacer for centering the second Typography */}
+                            <Typography
+                                component="h1"
+                                variant="h6"
+                                color="inherit"
+                                noWrap
+                                sx={{ flexGrow: 0, textAlign: 'center' }} // Aligns to the center
+                            >
+                                {userData && userData.name && `Welcome, ${userData.name}`}
+                            </Typography>
+                            <Box sx={{ flexGrow: 1 }} /> {/* Spacer for keeping the center alignment */}
+                        </Box>
                         <IconButton color="inherit">
                             <Badge color="secondary">
                                 <NotificationsIcon />

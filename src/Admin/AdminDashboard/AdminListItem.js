@@ -8,35 +8,24 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 
 export const adminmainListItems = (
     <React.Fragment>
-        <ListItemButton component={Link} to="/admindashboard">
-            <ListItemIcon>
-                <DashboardIcon />
-            </ListItemIcon>
-            <ListItemText primary="Dashboard" />
-        </ListItemButton>
+
         <ListItemButton component={Link} to="/admindashboard/accountmanagement">
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
             <ListItemText primary="Account Management" />
         </ListItemButton>
-        <ListItemButton component={Link} to="/admindashboard/part2">
+        <ListItemButton component={Link} to="/admindashboard/doctors">
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
-            <ListItemText primary="Part 2" />
+            <ListItemText primary="Doctors" />
         </ListItemButton>
-        <ListItemButton component={Link} to="/admindashboard/part3">
+        <ListItemButton component={Link} to="/admindashboard/nurses">
             <ListItemIcon>
                 <DashboardIcon />
             </ListItemIcon>
-            <ListItemText primary="Part 3" />
-        </ListItemButton>
-        <ListItemButton component={Link} to="/admindashboard/part4">
-            <ListItemIcon>
-                <DashboardIcon />
-            </ListItemIcon>
-            <ListItemText primary="Part 4" />
+            <ListItemText primary="Nurses" />
         </ListItemButton>
     </React.Fragment>
 );

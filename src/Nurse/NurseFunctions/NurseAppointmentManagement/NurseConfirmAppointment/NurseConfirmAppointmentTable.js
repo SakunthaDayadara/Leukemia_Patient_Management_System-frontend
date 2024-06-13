@@ -21,29 +21,7 @@ function NurseConfirmAppointmentTable() {
         }
     };
 
-    const handleDelete = async (rowData) => {
-        const isConfirmed = window.confirm('Are you sure you want to delete this appointment?');
-        if (!isConfirmed) return;
 
-        try {
-            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/appointments/delete_by_appointment_id?appointment_id=${rowData.appointment_id}`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            if (response.ok) {
-                alert('Appointment deleted successfully!');
-                fetchAppointments(); // Refresh the list of appointments
-            } else {
-                console.error('Failed to delete appointment:', response.statusText);
-                alert('Failed to delete appointment');
-            }
-        } catch (error) {
-            console.error('Error deleting appointment:', error);
-            alert('Error deleting appointment');
-        }
-    };
 
     return (
         <React.Fragment>
@@ -78,14 +56,7 @@ function NurseConfirmAppointmentTable() {
                                 console.log('Edit appointment:', rowData);
                             }
                         },
-                        {
-                            icon: 'delete',
-                            tooltip: 'Delete Appointment',
-                            onClick: (event, rowData) => {
-                                handleDelete(rowData);
-                                console.log('Delete appointment:', rowData);
-                            }
-                        }
+
                     ]}
                 />
             </Paper>

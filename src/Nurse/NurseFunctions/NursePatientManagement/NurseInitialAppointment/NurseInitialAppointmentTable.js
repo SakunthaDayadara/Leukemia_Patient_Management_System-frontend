@@ -27,8 +27,9 @@ function NurseInitialAppointmentTable() {
         if (!isConfirmed) return;
 
         try {
+            console.log(rowData.patient_id);
             const token = localStorage.getItem('token');
-            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}patients/delete_by_patient_id?patient_id=${rowData.patient_id}`, {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/patients/delete_by_patient_id?patient_id=${rowData.patient_id}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`,

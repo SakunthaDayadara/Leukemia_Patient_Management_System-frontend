@@ -5,9 +5,21 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import React from "react";
 import Button from "@mui/material/Button";
-import {Link, Outlet} from "react-router-dom";
+import {Link, Outlet, useLocation} from "react-router-dom";
 
 function AdminAccountManagement() {
+    const location = useLocation();
+
+    const getButtonStyles = (path) => {
+        return location.pathname === path ? {
+            backgroundColor: 'darkblue',
+            color: 'white',
+            '&:hover': {
+                backgroundColor: 'navy'
+            }
+        } : {};
+    };
+
     return (
         <React.Fragment>
             <Box
@@ -34,10 +46,10 @@ function AdminAccountManagement() {
                                 height: 60,
                             }}
                         >
-                            <Button variant="contained" component={Link} to="/admindashboard/accountmanagement" sx={{ mr: 2 }}>
+                            <Button variant="contained" component={Link} to="/admindashboard/accountmanagement" sx={{ mr: 2, ...getButtonStyles("/admindashboard/accountmanagement") }}>
                                 Create Accounts
                             </Button>
-                            <Button variant="contained" component={Link} to="/admindashboard/accountmanagement/updateaccount" >
+                            <Button variant="contained" component={Link} to="/admindashboard/accountmanagement/updateaccount" sx={{ mr: 2, ...getButtonStyles("/admindashboard/accountmanagement/updateaccount") }}>
                                 Update Accounts
                             </Button>
                         </Paper>
